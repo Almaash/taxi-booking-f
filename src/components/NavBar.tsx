@@ -19,6 +19,7 @@ const NavBar = () => {
     await signOut();
     router.push("/sign-in");
   };
+  
 
   const handleNavigate = async () => {
     router.push("/");
