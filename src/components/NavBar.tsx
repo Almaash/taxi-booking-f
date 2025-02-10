@@ -40,7 +40,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full z-10 flex justify-between items-center p-4 gap-4 h-16 bg-emerald-700 shadow">
+    <div className=" top-0 left-0 w-full z-10 flex justify-between items-center p-4 gap-4 h-16 bg-emerald-700 shadow">
       <div className="text-xl font-bold">
         <h1 onClick={handleNavigate} className="cursor-pointer flex gap-2 text-white">
           CABZZ <Car className="h-6 w-6" />
