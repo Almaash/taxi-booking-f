@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { Controller, useForm, useWatch } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import axios from "axios";
 
 interface LocationData {
@@ -107,7 +107,7 @@ const AutoCompleteAddress = () => {
   };
 
   return (
-    <div className="mt-4">
+    <div className="">
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Source Address */}
         <div>
@@ -127,8 +127,8 @@ const AutoCompleteAddress = () => {
                     field.onChange(e);
                     onChange(e.target.value, "source");
                   }}
-                  className="bg-white p-1 border-[1px] w-full rounded-md outline-none focus:border-emerald-600"
-                  placeholder="Search for address..."
+                  className="bg-white  border-[1px] w-full rounded-md outline-none focus:border-emerald-600 p-2"
+                  placeholder="search for source..."
                 />
 
                 {sourceData?.length > 0 && !isSourceSelected && ( 
@@ -167,8 +167,8 @@ const AutoCompleteAddress = () => {
                     field.onChange(e);
                     onChange(e.target.value, "destination");
                   }}
-                  className="bg-white p-1 border-[1px] w-full rounded-md outline-none focus:border-emerald-600"
-                  placeholder="Search for address..."
+                  className="bg-white  border-[1px] w-full rounded-md outline-none focus:border-emerald-600 p-2"
+                  placeholder="search for destination..."
                 />
 
                 {destData?.length > 0 && !isDestSelected && ( // Show suggestions if not selected
@@ -190,10 +190,10 @@ const AutoCompleteAddress = () => {
         </div>
       </form>
 
-      <div className="mt-10">
+      {/* <div className="mt-10">
         <p>Selected Source: {sourceAddress}</p> <br /><br />
         <p>Selected Destination: {destination}</p>
-      </div>
+      </div> */}
     </div>
   );
 };
