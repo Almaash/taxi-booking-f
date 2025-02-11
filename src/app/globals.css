@@ -19,3 +19,33 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* for Internet Explorer */
+  scrollbar-width: none;  /* for Firefox */
+}
+
+/* Width of the scrollbar */
+::-webkit-scrollbar {
+  width: 4px; /* Adjust width */
+}
+
+/* Track (background) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light gray */
+}
+
+/* Thumb (scroll handle) */
+::-webkit-scrollbar-thumb {
+  background: #059669 ; /* Darker gray */
+  border-radius: 5px; /* Rounded edges */
+}
+
+/* On hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Even darker */
+}

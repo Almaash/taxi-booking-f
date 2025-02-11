@@ -36,7 +36,7 @@ const NavBar = () => {
     // if (typeof window !== "undefined") {
     //   handleSignedInRedirect();
     // }
-      handleSignedInRedirect();
+      // handleSignedInRedirect();
   }, []);
 
   return (
