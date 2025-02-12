@@ -12,50 +12,87 @@ interface LocationData {
 
 const AutoCompleteAddress = () => {
   const { control, setValue, handleSubmit, watch } = useForm();
-  const [sourceData, setSourceData] = useState<LocationData[]>([]); 
-  const [destData, setDestData] = useState<LocationData[]>([]); 
-  const [isSourceSelected, setIsSourceSelected] = useState(false); 
-  const [isDestSelected, setIsDestSelected] = useState(false); 
+  const [sourceData, setSourceData] = useState<LocationData[]>([]);
+  const [destData, setDestData] = useState<LocationData[]>([]);
+  const [isSourceSelected, setIsSourceSelected] = useState(false);
+  const [isDestSelected, setIsDestSelected] = useState(false);
   const timeoutRef = useRef<any>(null);
 
-  const sourceAddress = watch("source"); 
-  const destination = watch("destination"); 
+  const sourceAddress = watch("source");
+  const destination = watch("destination");
 
   // Fetching data based on the search query
-  const fetchData = async (query: string, type: "source" | "destination") => {
-    try {
-      const response = await axios.get(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${query}`
-      );
+  // const fetchData = async (query: string, type: "source" | "destination") => {
+  //   try {
+  //     const response = await axios.get(
+  //       `https://nominatim.openstreetmap.org/search?format=json&q=${query}`
+  //     );
 
-      const extractedData = response?.data?.map((item: any) => ({
-        display_name: item.display_name,
-        lat: item.lat,
-        lon: item.lon,
+  //     const extractedData = response?.data?.map((item: any) => ({
+  //       display_name: item.display_name,
+  //       lat: item.lat,
+  //       lon: item.lon,
+  //     }));
+
+  //     if (type === "source") {
+  //       setSourceData(extractedData);
+  //     } else {
+  //       setDestData(extractedData);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  // };
+
+  const handleSearch = async (
+    query: string,
+    type: "source" | "destination"
+  ) => {
+    try {
+      const response = await fetch(`/api/search-address?q=${query}`);
+      const data = await response.json();
+
+      const extractedData = data?.suggestions?.map((item: any) => ({
+        display_name: `${item?.name}, ${item?.place_formatted}`,
+        lat: item?.lat,
+        lon: item?.lon,
       }));
 
       if (type === "source") {
-        setSourceData(extractedData); 
+        setSourceData(extractedData);
       } else {
-        setDestData(extractedData); 
+        setDestData(extractedData);
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.log(error);
     }
   };
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       if (sourceAddress) {
-        fetchData(sourceAddress, "source");
+        handleSearch(sourceAddress, "source");
       }
       if (destination) {
-        fetchData(destination, "destination");
+        handleSearch(destination, "destination");
       }
     }, 500);
 
     return () => clearTimeout(timeoutId);
   }, [sourceAddress, destination]);
+
+  // useEffect(() => {
+  //   const timeoutId = setTimeout(() => {
+  //     if (sourceAddress) {
+  //       fetchData(sourceAddress, "source");
+  //     }
+  //     if (destination) {
+  //       fetchData(destination, "destination");
+  //     }
+  //   }, 500);
+
+  //   return () => clearTimeout(timeoutId);
+  // }, [sourceAddress, destination]);
 
   const getPredictions = (value: string, type: "source" | "destination") => {
     const data = type === "source" ? sourceData : destData;
@@ -83,22 +120,25 @@ const AutoCompleteAddress = () => {
       }, 500);
     } else {
       if (type === "source") {
-        setSourceData([]); 
+        setSourceData([]);
       } else {
-        setDestData([]); 
+        setDestData([]);
       }
     }
   };
 
-  const handleSelectAddress = (item: LocationData, type: "source" | "destination") => {
+  const handleSelectAddress = (
+    item: LocationData,
+    type: "source" | "destination"
+  ) => {
     if (type === "source") {
       setValue("source", item.display_name);
-      setIsSourceSelected(true); 
-      setSourceData([]); 
+      setIsSourceSelected(true);
+      setSourceData([]);
     } else {
       setValue("destination", item.display_name);
-      setIsDestSelected(true); 
-      setDestData([]); 
+      setIsDestSelected(true);
+      setDestData([]);
     }
   };
 
@@ -131,7 +171,7 @@ const AutoCompleteAddress = () => {
                   placeholder="search for source..."
                 />
 
-                {sourceData?.length > 0 && !isSourceSelected && ( 
+                {sourceData?.length > 0 && !isSourceSelected && (
                   <ul className=" w-full bg-white border border-gray-300 rounded shadow-lg max-h-60 overflow-y-auto mt-1">
                     {sourceData?.map((item: LocationData, index) => (
                       <li
@@ -171,19 +211,22 @@ const AutoCompleteAddress = () => {
                   placeholder="search for destination..."
                 />
 
-                {destData?.length > 0 && !isDestSelected && ( // Show suggestions if not selected
-                  <ul className=" w-full bg-white border border-gray-300 rounded shadow-lg max-h-60 overflow-y-auto mt-1">
-                    {destData?.map((item: LocationData, index) => (
-                      <li
-                        key={index}
-                        onClick={() => handleSelectAddress(item, "destination")}
-                        className="p-2 cursor-pointer hover:bg-gray-200"
-                      >
-                        {item.display_name}
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                {destData?.length > 0 &&
+                  !isDestSelected && ( // Show suggestions if not selected
+                    <ul className=" w-full bg-white border border-gray-300 rounded shadow-lg max-h-60 overflow-y-auto mt-1">
+                      {destData?.map((item: LocationData, index) => (
+                        <li
+                          key={index}
+                          onClick={() =>
+                            handleSelectAddress(item, "destination")
+                          }
+                          className="p-2 cursor-pointer hover:bg-gray-200"
+                        >
+                          {item.display_name}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
               </div>
             )}
           />
