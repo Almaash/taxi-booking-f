@@ -1,11 +1,21 @@
 "use client";
 import CarList from "@/app/data/CarList";
+import { useUserLocation } from "@/context/UserLocationContext";
 import Image from "next/image";
 import React, { useState } from "react";
 import { PiSeatFill } from "react-icons/pi";
 
 const Cars = () => {
   const [selectedCars, setSelecctedCars] = useState<any>();
+  const {
+    directationData
+    } = useUserLocation();
+
+    console.log(directationData,"directationData ===============>")
+
+    const getCost=(charges:any)=>{
+      return (charges*directationData.routes[0].distance/1000).toFixed(2)
+    }
   return (
     <>
       <div className="mt-5">
@@ -68,7 +78,8 @@ const Cars = () => {
                     index === selectedCars ? "text-white" : "text-emerald-900"
                   }`}
                 >
-                  {item.charges * 8}$
+                  Rs. {directationData.routes ?  getCost(item.charges) : 0} 
+                  
                 </div>
               </div>
             </div>

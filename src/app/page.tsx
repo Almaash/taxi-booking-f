@@ -6,6 +6,9 @@ import React, { useEffect, useState } from "react";
 
 const page = () => {
   const [userLocation, setUserLocation] = useState<any>();
+  const [sourceCoordinates, setSourceCoordinates] = useState<any>([]);
+  const [destinationCoordinates, setDestinationCoordinates] = useState<any>([]);
+  const [directationData, setdirectationData] = useState<any>([]);
 
   useEffect(() => {
     getUserLocation();
@@ -21,7 +24,18 @@ const page = () => {
   };
   return (
     <div className="">
-      <UserLocationContext.Provider value={{ userLocation, setUserLocation }}>
+      <UserLocationContext.Provider
+        value={{
+          userLocation,
+          setUserLocation,
+          sourceCoordinates,
+          setSourceCoordinates,
+          destinationCoordinates,
+          setDestinationCoordinates,
+          directationData,
+          setdirectationData
+        }}
+      >
         <BookingPage />
       </UserLocationContext.Provider>
     </div>
