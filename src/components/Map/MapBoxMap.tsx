@@ -5,6 +5,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { useUserLocation } from "@/context/UserLocationContext";
 import Image from "next/image";
 import MapBoxRoute from "./MapBoxRoute";
+import DistanceTime from "./DistanceTime";
 
 const MapBoxMap = () => {
   const mapRef = useRef<any>(null);
@@ -17,7 +18,7 @@ const MapBoxMap = () => {
     directationData,
   } = useUserLocation();
 
-  const markerLatitude: any = userLocation?.lat ;
+  const markerLatitude: any = userLocation?.lat;
   const markerLongitude: any = userLocation?.lan;
 
   // move the map to the source place
@@ -52,7 +53,6 @@ const MapBoxMap = () => {
     const result = await res.json();
     setdirectationData(result);
   };
-
 
   if (markerLatitude == undefined && markerLongitude == undefined) {
     return (
@@ -110,6 +110,11 @@ const MapBoxMap = () => {
             ) : null}
           </Map>
         </div>
+        {directationData?.routes && (
+          <div className="absolute bottom-[11px] z-20 right-[5px] hidden md:block">
+            <DistanceTime />
+          </div>
+        )}
       </div>
     </>
   );
