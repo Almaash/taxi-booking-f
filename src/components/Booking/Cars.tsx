@@ -7,15 +7,13 @@ import { PiSeatFill } from "react-icons/pi";
 
 const Cars = () => {
   const [selectedCars, setSelecctedCars] = useState<any>();
-  const {
-    directationData
-    } = useUserLocation();
+  const { directationData, setPaymentAmount,paymentAmount } = useUserLocation();
 
-    console.log(directationData,"directationData ===============>")
+  console.log(paymentAmount,"paymentAmount============>>>>>>>")
 
-    const getCost=(charges:any)=>{
-      return (charges*directationData.routes[0].distance/1000).toFixed(2)
-    }
+  const getCost = (charges: any) => {
+    return ((charges * directationData.routes[0].distance) / 1000).toFixed(2);
+  };
   return (
     <>
       <div className="mt-5">
@@ -30,7 +28,10 @@ const Cars = () => {
                   : "border-gray-300 bg-white "
               } transition-all duration-200 ease-in-out`}
               key={index}
-              onClick={() => setSelecctedCars(index)}
+              onClick={() => {
+                setSelecctedCars(index),
+                  setPaymentAmount(getCost(item?.charges));
+              }}
             >
               <div className="flex justify-between items-center">
                 <div className="flex">
@@ -78,8 +79,7 @@ const Cars = () => {
                     index === selectedCars ? "text-white" : "text-emerald-900"
                   }`}
                 >
-                  Rs. {directationData.routes ?  getCost(item.charges) : 0} 
-                  
+                  Rs. {directationData.routes ? getCost(item.charges) : 0}
                 </div>
               </div>
             </div>

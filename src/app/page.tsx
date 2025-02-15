@@ -9,6 +9,7 @@ const page = () => {
   const [sourceCoordinates, setSourceCoordinates] = useState<any>([]);
   const [destinationCoordinates, setDestinationCoordinates] = useState<any>([]);
   const [directationData, setdirectationData] = useState<any>([]);
+  const [paymentAmount, setPaymentAmount] = useState<any>([]);
 
   useEffect(() => {
     getUserLocation();
@@ -33,7 +34,9 @@ const page = () => {
           destinationCoordinates,
           setDestinationCoordinates,
           directationData,
-          setdirectationData
+          setdirectationData,
+          paymentAmount,
+          setPaymentAmount,
         }}
       >
         <BookingPage />
