@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
 import axios from "axios";
+import { useUserLocation } from "@/context/UserLocationContext";
 
 interface LocationData {
   display_name: string;
@@ -13,6 +14,7 @@ interface LocationData {
 const AutoCompleteAddress = () => {
   const { control, setValue, handleSubmit, watch } = useForm();
   const [sourceData, setSourceData] = useState<LocationData[]>([]);
+  
   const [destData, setDestData] = useState<LocationData[]>([]);
   const [isSourceSelected, setIsSourceSelected] = useState(false);
   const [isDestSelected, setIsDestSelected] = useState(false);
@@ -21,28 +23,13 @@ const AutoCompleteAddress = () => {
   const sourceAddress = watch("source");
   const destination = watch("destination");
 
-  // Fetching data based on the search query
-  // const fetchData = async (query: string, type: "source" | "destination") => {
-  //   try {
-  //     const response = await axios.get(
-  //       `https://nominatim.openstreetmap.org/search?format=json&q=${query}`
-  //     );
+  const {
+    sourceCoordinates,
+    setSourceCoordinates,
+    destinationCoordinates,
+    setDestinationCoordinates,
+  } = useUserLocation();
 
-  //     const extractedData = response?.data?.map((item: any) => ({
-  //       display_name: item.display_name,
-  //       lat: item.lat,
-  //       lon: item.lon,
-  //     }));
-
-  //     if (type === "source") {
-  //       setSourceData(extractedData);
-  //     } else {
-  //       setDestData(extractedData);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   }
-  // };
 
   const handleSearch = async (
     query: string,
@@ -56,6 +43,7 @@ const AutoCompleteAddress = () => {
         display_name: `${item?.name}, ${item?.place_formatted}`,
         lat: item?.lat,
         lon: item?.lon,
+        mapbox_id: item?.mapbox_id,
       }));
 
       if (type === "source") {
@@ -81,26 +69,13 @@ const AutoCompleteAddress = () => {
     return () => clearTimeout(timeoutId);
   }, [sourceAddress, destination]);
 
-  // useEffect(() => {
-  //   const timeoutId = setTimeout(() => {
-  //     if (sourceAddress) {
-  //       fetchData(sourceAddress, "source");
-  //     }
-  //     if (destination) {
-  //       fetchData(destination, "destination");
-  //     }
-  //   }, 500);
-
-  //   return () => clearTimeout(timeoutId);
-  // }, [sourceAddress, destination]);
-
   const getPredictions = (value: string, type: "source" | "destination") => {
     const data = type === "source" ? sourceData : destData;
     return data.filter(
       (item) =>
         item?.display_name.toLowerCase().includes(value.toLowerCase()) ||
-        item?.lat.includes(value) ||
-        item?.lon.includes(value)
+        item?.lat?.includes(value) ||
+        item?.lon?.includes(value)
     );
   };
 
@@ -146,10 +121,47 @@ const AutoCompleteAddress = () => {
     console.log(data);
   };
 
+  const onSourceAddressClick = async (item: any) => {
+    setTimeout(async () => {
+      setValue("source", item?.display_name);
+      setIsSourceSelected(true);
+      setSourceData([]);
+
+      const res = await fetch(
+        `https://api.mapbox.com/search/searchbox/v1/retrieve/${item?.mapbox_id}?session_token=5ccce4a4-ab0a-4a7c-943d-580e55542363&access_token=pk.eyJ1Ijoia3VsZW1iZXRvdiIsImEiOiJjbHc2N2Nyc3kxcmpkMnJwZHNqcHFha2VwIn0.WXe-0CaUDyNjjzIj2Z3m0A`
+      );
+
+      const result = await res.json();
+      
+      setSourceCoordinates({
+        lan:result?.features[0]?.geometry?.coordinates[0],
+        lat:result?.features[0]?.geometry?.coordinates[1]
+      })
+    }, 500);
+  };
+  
+  const onDetinationAddressClick = async (item: any) => {
+    setTimeout(async () => {
+      setValue("destination", item?.display_name);
+      setIsDestSelected(true);
+      setDestData([]);
+
+      const res = await fetch(
+        `https://api.mapbox.com/search/searchbox/v1/retrieve/${item?.mapbox_id}?session_token=5ccce4a4-ab0a-4a7c-943d-580e55542363&access_token=pk.eyJ1Ijoia3VsZW1iZXRvdiIsImEiOiJjbHc2N2Nyc3kxcmpkMnJwZHNqcHFha2VwIn0.WXe-0CaUDyNjjzIj2Z3m0A`
+      );
+
+      const result = await res.json();
+      
+      setDestinationCoordinates({
+        lan:result?.features[0]?.geometry?.coordinates[0],
+        lat:result?.features[0]?.geometry?.coordinates[1]
+      })
+    }, 500);
+  };
+
   return (
     <div className="">
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* Source Address */}
         <div>
           <label htmlFor="source" className="text-gray-500">
             Where From?
@@ -176,7 +188,10 @@ const AutoCompleteAddress = () => {
                     {sourceData?.map((item: LocationData, index) => (
                       <li
                         key={index}
-                        onClick={() => handleSelectAddress(item, "source")}
+                        onClick={() => {
+                          handleSelectAddress(item, "source"),
+                            onSourceAddressClick(item);
+                        }}
                         className="p-2 cursor-pointer hover:bg-gray-200"
                       >
                         {item.display_name}
@@ -189,7 +204,6 @@ const AutoCompleteAddress = () => {
           />
         </div>
 
-        {/* Destination Address */}
         <div className="mt-5">
           <label htmlFor="destination" className="text-gray-500">
             Where To?
@@ -212,13 +226,15 @@ const AutoCompleteAddress = () => {
                 />
 
                 {destData?.length > 0 &&
-                  !isDestSelected && ( // Show suggestions if not selected
+                  !isDestSelected && ( 
                     <ul className=" w-full bg-white border border-gray-300 rounded shadow-lg max-h-60 overflow-y-auto mt-1">
                       {destData?.map((item: LocationData, index) => (
                         <li
                           key={index}
                           onClick={() =>
-                            handleSelectAddress(item, "destination")
+                            {handleSelectAddress(item, "destination"),
+                              onDetinationAddressClick(item)
+                            }
                           }
                           className="p-2 cursor-pointer hover:bg-gray-200"
                         >
