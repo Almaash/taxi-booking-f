@@ -9,7 +9,7 @@ const Cars = () => {
   const [selectedCars, setSelecctedCars] = useState<any>();
   const { directationData, setPaymentAmount,paymentAmount } = useUserLocation();
 
-  console.log(paymentAmount,"paymentAmount============>>>>>>>")
+  // console.log(paymentAmount,"paymentAmount============>>>>>>>")
 
   const getCost = (charges: any) => {
     return ((charges * directationData.routes[0].distance) / 1000).toFixed(2);
