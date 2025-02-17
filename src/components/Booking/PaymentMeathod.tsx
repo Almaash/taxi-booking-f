@@ -2,9 +2,13 @@
 import React, { useState } from "react";
 import paymentMeathodList from "@/app/data/paymentMeathodList";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+
 
 const PaymentMeathod = () => {
   const [selectedCars, setSelecctedCars] = useState<any>();
+  const router: any = useRouter();
+
 
   return (
     <>
@@ -31,6 +35,12 @@ const PaymentMeathod = () => {
             </div>
           ))}
         </div>
+        <button
+            className="bg-emerald-600 text-white w-full rounded p-1 mt-2 hover:bg-emerald-800"
+            onClick={() => router.push("/pages/payment")}
+          >
+            Book
+          </button>
       </div>
     </>
   );

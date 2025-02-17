@@ -65,7 +65,7 @@ const MapBoxMap = () => {
   return (
     <>
       <div className="">
-        <h1>Map</h1>
+        <h1 className="pt-3"> {" "}</h1>
         <div className="rounded-lg overflow-hidden">
           <Map
             ref={mapRef}
@@ -83,15 +83,21 @@ const MapBoxMap = () => {
             mapStyle="mapbox://styles/mapbox/streets-v12"
           >
             {/* source coordinates */}
-            {sourceCoordinates != 0 && (
+            {sourceCoordinates != 0 ? 
               <Marker
                 longitude={sourceCoordinates?.lan}
                 latitude={sourceCoordinates?.lat}
                 anchor="bottom"
               >
-                <img src="./marker.png" className="w-11" />
-              </Marker>
-            )}
+                <Image src="/marker.png" alt="marker loading" width={40} height={40} />
+                </Marker> : <Marker
+                longitude={markerLongitude}
+                latitude={markerLatitude}
+                anchor="bottom"
+              >
+                <Image src="/marker.png" alt="marker loading" width={40} height={40} />
+\              </Marker>
+            }
             {/* destination coordinates */}
             {destinationCoordinates != 0 && (
               <Marker
@@ -99,8 +105,8 @@ const MapBoxMap = () => {
                 latitude={destinationCoordinates?.lat}
                 anchor="bottom"
               >
-                <img src="./marker.png" className="w-11" />
-              </Marker>
+                <Image src="/marker.png" alt="marker loading" width={40} height={40} />
+                </Marker>
             )}
 
             {directationData?.routes ? (
