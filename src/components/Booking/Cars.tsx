@@ -33,6 +33,7 @@ const Cars = ({setPayment}:any) => {
                 setSelecctedCars(index),
                 setPayment(getCost(item?.charges)),
                   setPaymentAmount(getCost(item?.charges));
+                  localStorage.setItem("paynentAmount", getCost(item?.charges));
               }}
             >
               <div className="flex justify-between items-center">

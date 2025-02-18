@@ -1,10 +1,35 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useUserLocation } from "@/context/UserLocationContext";
 
 export default function BookingConfirmation() {
+  const { sourceAddress, destinationAddress, directationData } =
+    useUserLocation();
   const [showImage, setShowImage] = useState(false); // To control image visibility
   const router = useRouter();
+
+  const pickupAddress = localStorage.getItem("sourceAddress");
+  const dropLocation = localStorage.getItem("destination");
+  const distance = localStorage.getItem("distance");
+  const time = localStorage.getItem("time");
+  const paynentAmount = localStorage.getItem("paynentAmount");
+
+  // formatted date and time ==================
+  const currentDateTime = new Date();
+
+  const options: any = {
+    month: "short",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  };
+
+  const formattedDateTime = currentDateTime.toLocaleString("en-US", options);
+  const finalDateTime = formattedDateTime.replace(",", " •");
+
+  // ====================================
 
   const handleCancelClick = () => {
     // Show the image
@@ -54,16 +79,12 @@ export default function BookingConfirmation() {
                 <div className="flex-1 space-y-3">
                   <div>
                     <p className="text-sm text-gray-500">Pickup Location</p>
-                    <p className="font-medium text-gray-900">
-                      Lalpur, Ranchi, Jharkhand, India
-                    </p>
+                    <p className="font-medium text-gray-900">{pickupAddress}</p>
                   </div>
                   <div className="border-t border-b my-4"></div>
                   <div>
                     <p className="text-sm text-gray-500">Drop Location</p>
-                    <p className="font-medium text-gray-900">
-                      Namkum, Ranchi, Jharkhand, India
-                    </p>
+                    <p className="font-medium text-gray-900">{dropLocation}</p>
                   </div>
                 </div>
               </div>
@@ -81,9 +102,7 @@ export default function BookingConfirmation() {
                 </svg>
                 <div>
                   <p className="text-sm text-gray-500">Date & Time</p>
-                  <p className="font-medium text-gray-900">
-                    Feb 17, 2024 • 10:30 AM
-                  </p>
+                  <p className="font-medium text-gray-900">{finalDateTime}</p>
                 </div>
               </div>
 
@@ -100,7 +119,15 @@ export default function BookingConfirmation() {
                 </svg>
                 <div>
                   <p className="text-sm text-gray-500">Estimated Duration</p>
-                  <p className="font-medium text-gray-900">45 mins (15.5 km)</p>
+                  <h2 className="text-white text-[15px]">
+                    <span className="text-black pr-3 font-semibold">
+                      Distance:{" "}
+                      <span className="text-emerald-600">{distance} Km</span>
+                    </span>
+                    <span className="text-black pr-3 font-semibold">
+                      Duration: <span className="text-emerald-600">{time} Min</span>
+                    </span>
+                  </h2>
                 </div>
               </div>
             </div>
@@ -112,16 +139,16 @@ export default function BookingConfirmation() {
             <div className="space-y-3">
               <div className="flex justify-between text-gray-600">
                 <span>Base Fare</span>
-                <span>$80.43</span>
+                <span>${paynentAmount}</span>
               </div>
               <div className="flex justify-between text-gray-600">
                 <span>Taxes & Fees</span>
-                <span>$8.04</span>
+                <span>$0.00</span>
               </div>
               <div className="border-t border-b my-4"></div>
               <div className="flex justify-between font-semibold text-gray-900">
                 <span>Total Amount</span>
-                <span>$88.47</span>
+                <span>${paynentAmount}</span>
               </div>
               <div className="mt-4 bg-green-50 p-4 rounded-lg">
                 <div className="flex items-center gap-2 text-green-700">

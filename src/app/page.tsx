@@ -6,7 +6,6 @@ import { useClerk } from "@clerk/nextjs";
 import React, { useEffect, useState } from "react";
 
 const page = () => {
-
   const { user } = useClerk();
 
   const [userLocation, setUserLocation] = useState<any>();
@@ -14,6 +13,10 @@ const page = () => {
   const [destinationCoordinates, setDestinationCoordinates] = useState<any>([]);
   const [directationData, setdirectationData] = useState<any>([]);
   const [paymentAmount, setPaymentAmount] = useState<any>([]);
+  const [sourceAddress, setSourceAddress] = useState<any>('');
+  const [destinationAddress, setDestinationAddress] = useState<any>('');
+  const [carDetails, setCarDetails] = useState<any>('');
+  const [timeDuratation, setTimeDuratation] = useState<any>('');
 
   useEffect(() => {
     getUserLocation();
@@ -30,30 +33,37 @@ const page = () => {
 
   const [isClient, setIsClient] = useState(false);
 
-useEffect(() => {
-  setIsClient(true); // Set to true only after the component mounts
-}, []);
+  useEffect(() => {
+    setIsClient(true); // Set to true only after the component mounts
+  }, []);
 
-if (!isClient) return null;
+  if (!isClient) return null;
 
   return (
     <div className="">
-        <UserLocationContext.Provider
-          value={{
-            userLocation,
-            setUserLocation,
-            sourceCoordinates,
-            setSourceCoordinates,
-            destinationCoordinates,
-            setDestinationCoordinates,
-            directationData,
-            setdirectationData,
-            paymentAmount,
-            setPaymentAmount,
-          }}
-        >
-           {user ? <BookingPage/> : <Home />}
-           
+      <UserLocationContext.Provider
+        value={{
+          userLocation,
+          setUserLocation,
+          sourceCoordinates,
+          setSourceCoordinates,
+          destinationCoordinates,
+          setDestinationCoordinates,
+          directationData,
+          setdirectationData,
+          paymentAmount,
+          setPaymentAmount,
+          sourceAddress,
+          setSourceAddress,
+          destinationAddress,
+          setDestinationAddress,
+          carDetails,
+          setCarDetails,
+          timeDuratation,
+          setTimeDuratation,
+        }}
+      >
+        {user ? <BookingPage /> : <Home />}
       </UserLocationContext.Provider>
     </div>
   );

@@ -14,7 +14,7 @@ interface LocationData {
 const AutoCompleteAddress = () => {
   const { control, setValue, handleSubmit, watch } = useForm();
   const [sourceData, setSourceData] = useState<LocationData[]>([]);
-  
+
   const [destData, setDestData] = useState<LocationData[]>([]);
   const [isSourceSelected, setIsSourceSelected] = useState(false);
   const [isDestSelected, setIsDestSelected] = useState(false);
@@ -28,8 +28,10 @@ const AutoCompleteAddress = () => {
     setSourceCoordinates,
     destinationCoordinates,
     setDestinationCoordinates,
+    setSourceAddress,
+    setDestinationAddress,
+    destinationAddress
   } = useUserLocation();
-
 
   const handleSearch = async (
     query: string,
@@ -124,6 +126,7 @@ const AutoCompleteAddress = () => {
   const onSourceAddressClick = async (item: any) => {
     setTimeout(async () => {
       setValue("source", item?.display_name);
+      setSourceAddress(item?.display_name);
       setIsSourceSelected(true);
       setSourceData([]);
 
@@ -132,17 +135,18 @@ const AutoCompleteAddress = () => {
       );
 
       const result = await res.json();
-      
+
       setSourceCoordinates({
-        lan:result?.features[0]?.geometry?.coordinates[0],
-        lat:result?.features[0]?.geometry?.coordinates[1]
-      })
+        lan: result?.features[0]?.geometry?.coordinates[0],
+        lat: result?.features[0]?.geometry?.coordinates[1],
+      });
     }, 500);
   };
-  
+
   const onDetinationAddressClick = async (item: any) => {
     setTimeout(async () => {
       setValue("destination", item?.display_name);
+      setDestinationAddress(item?.display_name);
       setIsDestSelected(true);
       setDestData([]);
 
@@ -151,11 +155,11 @@ const AutoCompleteAddress = () => {
       );
 
       const result = await res.json();
-      
+
       setDestinationCoordinates({
-        lan:result?.features[0]?.geometry?.coordinates[0],
-        lat:result?.features[0]?.geometry?.coordinates[1]
-      })
+        lan: result?.features[0]?.geometry?.coordinates[0],
+        lat: result?.features[0]?.geometry?.coordinates[1],
+      });
     }, 500);
   };
 
@@ -191,6 +195,7 @@ const AutoCompleteAddress = () => {
                         onClick={() => {
                           handleSelectAddress(item, "source"),
                             onSourceAddressClick(item);
+                            localStorage.setItem("sourceAddress", sourceAddress);
                         }}
                         className="p-2 cursor-pointer hover:bg-gray-200"
                       >
@@ -225,24 +230,23 @@ const AutoCompleteAddress = () => {
                   placeholder="search for destination..."
                 />
 
-                {destData?.length > 0 &&
-                  !isDestSelected && ( 
-                    <ul className=" w-full bg-white border border-gray-300 rounded shadow-lg max-h-60 overflow-y-auto mt-1">
-                      {destData?.map((item: LocationData, index) => (
-                        <li
-                          key={index}
-                          onClick={() =>
-                            {handleSelectAddress(item, "destination"),
-                              onDetinationAddressClick(item)
-                            }
-                          }
-                          className="p-2 cursor-pointer hover:bg-gray-200"
-                        >
-                          {item.display_name}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                {destData?.length > 0 && !isDestSelected && (
+                  <ul className=" w-full bg-white border border-gray-300 rounded shadow-lg max-h-60 overflow-y-auto mt-1">
+                    {destData?.map((item: LocationData, index) => (
+                      <li
+                        key={index}
+                        onClick={() => {
+                          handleSelectAddress(item, "destination"),
+                            onDetinationAddressClick(item);
+                            localStorage.setItem("destination", destination);
+                        }}
+                        className="p-2 cursor-pointer hover:bg-gray-200"
+                      >
+                        {item.display_name}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             )}
           />
