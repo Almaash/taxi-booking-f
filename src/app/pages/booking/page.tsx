@@ -5,31 +5,35 @@ import React, { useEffect, useState } from "react";
 
 const page = () => {
   const [userLocation, setUserLocation] = useState<any>();
-    const [sourceCoordinates, setSourceCoordinates] = useState<any>([]);
-    const [destinationCoordinates, setDestinationCoordinates] = useState<any>([]);
-    const [directationData, setdirectationData] = useState<any>([]);
-    const [paymentAmount, setPaymentAmount] = useState<any>([]);
-     
-    const [isClient, setIsClient] = useState(false);
+  const [sourceCoordinates, setSourceCoordinates] = useState<any>([]);
+  const [destinationCoordinates, setDestinationCoordinates] = useState<any>([]);
+  const [directationData, setdirectationData] = useState<any>([]);
+  const [paymentAmount, setPaymentAmount] = useState<any>([]);
+  const [sourceAddress, setSourceAddress] = useState<any>();
+  const [destinationAddress, setDestinationAddress] = useState<any>();
+  const [carDetails, setCarDetails] = useState<any>();
+  const [timeDuratation, setTimeDuratation] = useState<any>();
 
-useEffect(() => {
-  setIsClient(true); // Set to true only after the component mounts
-}, []);
+  const [isClient, setIsClient] = useState(false);
 
-if (!isClient) return null;
-    
-    useEffect(() => {
-        getUserLocation();
-      }, []);
-    
-      const getUserLocation = () => {
-        navigator.geolocation.getCurrentPosition(function (pos) {
-          setUserLocation({
-            lat: pos.coords.latitude,
-            lan: pos.coords.longitude,
-          });
-        });
-      };
+  useEffect(() => {
+    setIsClient(true); // Set to true only after the component mounts
+  }, []);
+
+  if (!isClient) return null;
+
+  useEffect(() => {
+    getUserLocation();
+  }, []);
+
+  const getUserLocation = () => {
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      setUserLocation({
+        lat: pos.coords.latitude,
+        lan: pos.coords.longitude,
+      });
+    });
+  };
   return (
     <UserLocationContext.Provider
       value={{
@@ -43,6 +47,14 @@ if (!isClient) return null;
         setdirectationData,
         paymentAmount,
         setPaymentAmount,
+        sourceAddress,
+        setSourceAddress,
+        destinationAddress,
+        setDestinationAddress,
+        carDetails,
+        setCarDetails,
+        timeDuratation,
+        setTimeDuratation,
       }}
     >
       <BookingPage />

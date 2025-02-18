@@ -11,6 +11,14 @@ interface UserLocationContextType {
   setdirectationData: React.Dispatch<React.SetStateAction<any>>;
   paymentAmount: any; 
   setPaymentAmount: React.Dispatch<React.SetStateAction<any>>;
+  sourceAddress: any; 
+  setSourceAddress: React.Dispatch<React.SetStateAction<any>>;
+  destinationAddress: any; 
+  setDestinationAddress: React.Dispatch<React.SetStateAction<any>>;
+  carDetails: any; 
+  setCarDetails: React.Dispatch<React.SetStateAction<any>>;
+  timeDuratation: any; 
+  setTimeDuratation: React.Dispatch<React.SetStateAction<any>>;
 }
 
 export const UserLocationContext = createContext<UserLocationContextType | undefined>(undefined);

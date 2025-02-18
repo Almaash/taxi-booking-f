@@ -7,7 +7,8 @@ import { useSearchParams } from "next/navigation";
 import BookingConfirmation from "./BookingConfirmation";
 
 const Booking = () => {
-  const { directationData, paymentAmount } = useUserLocation();
+  const { directationData, paymentAmount } =
+    useUserLocation();
   const [isVisible, setIsVisible] = useState(false);
   const [payment, setPayment] = useState<any>();
 
@@ -15,10 +16,7 @@ const Booking = () => {
 
   const status = searchParams.get("status");
 
-  // console.log(status,"status ============>")
-
   useEffect(() => {
-    // This will trigger when the component is mounted or paymentAmount changes
     if (paymentAmount.length > 0) {
       setIsVisible(true);
     }
