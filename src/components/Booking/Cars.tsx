@@ -5,11 +5,12 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { PiSeatFill } from "react-icons/pi";
 
-const Cars = () => {
+const Cars = ({setPayment}:any) => {
   const [selectedCars, setSelecctedCars] = useState<any>();
-  const { directationData, setPaymentAmount,paymentAmount } = useUserLocation();
+  
+  const { directationData, setPaymentAmount } = useUserLocation();
 
-  // console.log(paymentAmount,"paymentAmount============>>>>>>>")
+
 
   const getCost = (charges: any) => {
     return ((charges * directationData.routes[0].distance) / 1000).toFixed(2);
@@ -30,6 +31,7 @@ const Cars = () => {
               key={index}
               onClick={() => {
                 setSelecctedCars(index),
+                setPayment(getCost(item?.charges)),
                   setPaymentAmount(getCost(item?.charges));
               }}
             >
@@ -79,7 +81,7 @@ const Cars = () => {
                     index === selectedCars ? "text-white" : "text-emerald-900"
                   }`}
                 >
-                  Rs. {directationData.routes ? getCost(item.charges) : 0}
+                  $ {directationData.routes ? getCost(item.charges) : 0}
                 </div>
               </div>
             </div>
