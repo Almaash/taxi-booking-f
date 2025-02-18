@@ -47,7 +47,8 @@ const CheckoutForm = () => {
     const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://localhost:3000/pages/checkout-success", // Ensure this URL is where you want to redirect
+        return_url: `http://${window.location.host}/pages/checkout-success`, // Ensure this URL is where you want to redirect
+        // return_url: `http://localhost:3000/pages/checkout-success`, // Ensure this URL is where you want to redirect
       },
       clientSecret,
     });
@@ -55,11 +56,8 @@ const CheckoutForm = () => {
     if (error) {
       console.log(error, "error");
     } else if (paymentIntent?.status === "succeeded") {
-      // Handle successful payment
       alert("Payment Successful!");
-      // You can store data in localStorage or redirect manually if needed
     } else {
-      // Handle other payment statuses (if necessary)
       console.log(paymentIntent?.status);
     }
   };

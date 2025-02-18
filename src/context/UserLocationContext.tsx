@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext } from 'react';
 
 interface UserLocationContextType {
   userLocation: {lat: number; lan: number} | undefined;

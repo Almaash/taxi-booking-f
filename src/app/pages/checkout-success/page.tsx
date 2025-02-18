@@ -41,8 +41,13 @@ const CheckoutSuccess = () => {
     <div className="flex flex-col space-y-5 justify-center items-center h-screen">
       {redirect_status == "succeeded" ? (
         <>
-        <Image src="/success.gif" alt="LOGO" height="340" width="340" />
-        <button onClick={()=>router.push("/sign-in")}>Back</button>
+          <Image src="/success.gif" alt="LOGO" height="340" width="340" />
+          <button
+            onClick={() => router.push(`/?status=${redirect_status}`)}
+            className="bg-yellow-400 hover:bg-yellow-600 px-9 py-2  rounded-lg"
+          >
+            Track Your Cab
+          </button>
         </>
       ) : (
         <>

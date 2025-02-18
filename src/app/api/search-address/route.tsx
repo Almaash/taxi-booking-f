@@ -23,14 +23,17 @@ export async function GET(request: any) {
 
     // Check if the response is ok
     if (!res.ok) {
-      return NextResponse.json({ error: "Failed to fetch data from Mapbox" }, { status: res.status });
+      const errorResponse = await res.text();  // Capture the response body for debugging
+      console.error('Mapbox API error:', errorResponse);
+      return NextResponse.json({ error: "Failed to fetch data from Mapbox", details: errorResponse }, { status: res.status });
     }
+    
 
     const data = await res.json();  // Wait for JSON parsing
     return NextResponse.json(data);
 
   } catch (error) {
-    console.error("Error:", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
-  }
+  console.error("Error:", error);
+  return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+}
 }

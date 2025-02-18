@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 
-const PaymentMeathod = () => {
+const PaymentMeathod = ({payment}:any) => {
   const [selectedCars, setSelecctedCars] = useState<any>();
   const router: any = useRouter();
 
@@ -37,7 +37,7 @@ const PaymentMeathod = () => {
         </div>
         <button
             className="bg-emerald-600 text-white w-full rounded p-1 mt-2 hover:bg-emerald-800"
-            onClick={() => router.push("/pages/payment")}
+            onClick={() => router.push(`/pages/payment?totCost=${payment}`)}
           >
             Book
           </button>

@@ -35,6 +35,7 @@ useEffect(() => {
 }, []);
 
 if (!isClient) return null;
+
   return (
     <div className="">
         <UserLocationContext.Provider
@@ -52,8 +53,7 @@ if (!isClient) return null;
           }}
         >
            {user ? <BookingPage/> : <Home />}
-        {/* <Home /> */}
-        {/* <BookingPage /> */}
+           
       </UserLocationContext.Provider>
     </div>
   );
