@@ -96,7 +96,7 @@ const MapBoxMap = () => {
                 anchor="bottom"
               >
                 <Image src="/marker.png" alt="marker loading" width={40} height={40} />
-\              </Marker>
+              </Marker>
             }
             {/* destination coordinates */}
             {destinationCoordinates != 0 && (
