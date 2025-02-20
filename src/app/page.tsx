@@ -13,10 +13,12 @@ const page = () => {
   const [destinationCoordinates, setDestinationCoordinates] = useState<any>([]);
   const [directationData, setdirectationData] = useState<any>([]);
   const [paymentAmount, setPaymentAmount] = useState<any>([]);
-  const [sourceAddress, setSourceAddress] = useState<any>('');
-  const [destinationAddress, setDestinationAddress] = useState<any>('');
-  const [carDetails, setCarDetails] = useState<any>('');
-  const [timeDuratation, setTimeDuratation] = useState<any>('');
+  const [sourceAddress, setSourceAddress] = useState<any>("");
+  const [destinationAddress, setDestinationAddress] = useState<any>("");
+  const [carDetails, setCarDetails] = useState<any>("");
+  const [timeDuratation, setTimeDuratation] = useState<any>("");
+  const [afterBookingDirectationData, setAfterBookingDdirectationData] =
+    useState<any>("");
 
   useEffect(() => {
     getUserLocation();
@@ -61,6 +63,8 @@ const page = () => {
           setCarDetails,
           timeDuratation,
           setTimeDuratation,
+          afterBookingDirectationData,
+          setAfterBookingDdirectationData,
         }}
       >
         {user ? <BookingPage /> : <Home />}

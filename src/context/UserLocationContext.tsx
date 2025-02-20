@@ -9,6 +9,8 @@ interface UserLocationContextType {
   setDestinationCoordinates: React.Dispatch<React.SetStateAction<any>>;
   directationData: any; 
   setdirectationData: React.Dispatch<React.SetStateAction<any>>;
+  afterBookingDirectationData: any; 
+  setAfterBookingDdirectationData: React.Dispatch<React.SetStateAction<any>>;
   paymentAmount: any; 
   setPaymentAmount: React.Dispatch<React.SetStateAction<any>>;
   sourceAddress: any; 

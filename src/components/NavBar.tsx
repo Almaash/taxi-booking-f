@@ -16,8 +16,6 @@ const NavBar = () => {
   const { signOut, user } = useClerk();
   const router = useRouter();
 
-  // console.log(user,"============>")
-
   const handleLogout = async () => {
     await signOut();
     router.push("/sign-in");
