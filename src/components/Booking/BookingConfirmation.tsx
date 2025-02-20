@@ -2,11 +2,15 @@ import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useUserLocation } from "@/context/UserLocationContext";
+import { GrLocationPin } from "react-icons/gr";
+import { IoIosTimer } from "react-icons/io";
+import { GiPathDistance } from "react-icons/gi";
+
 
 export default function BookingConfirmation() {
   const { sourceAddress, destinationAddress, directationData } =
     useUserLocation();
-  const [showImage, setShowImage] = useState(false); // To control image visibility
+  const [showImage, setShowImage] = useState(false);
   const router = useRouter();
 
   const pickupAddress = localStorage.getItem("sourceAddress");
@@ -32,20 +36,18 @@ export default function BookingConfirmation() {
   // ====================================
 
   const handleCancelClick = () => {
-    // Show the image
     setShowImage(true);
 
-    // After 2 seconds, navigate and hide the image
+    
     setTimeout(() => {
-      setShowImage(false); // Hide the image
-      router.push(`/?status=cancelled`); // Navigate
+      setShowImage(false); 
+      router.push(`/?status=cancelled`); 
     }, 2000);
   };
 
   return (
     <div className="p-6 lg:p-8">
       <div className="mx-auto max-w-4xl space-y-8">
-        {/* Booking Header - Fixed */}
         <div className="bg-white p-6 rounded-lg shadow-lg">
           <div className="flex items-center justify-between">
             <div>
@@ -57,66 +59,60 @@ export default function BookingConfirmation() {
           </div>
         </div>
 
-        {/* Scrollable Content - Fixed height and scrollable */}
         <div className="space-y-8 overflow-y-auto h-[400px] bg-gray-50 rounded">
-          {/* Trip Details */}
           <div className="bg-white p-6 m-4 rounded-lg shadow-lg">
+            <div className="flex justify-between">
+
             <h2 className="text-xl font-semibold mb-4">Trip Details</h2>
+            <GiPathDistance className="text-2xl text-black"/>
+            </div>
             <div className="space-y-6">
-              {/* Pickup and Drop Location */}
               <div className="flex items-start gap-4">
-                <div className="pt-1">
-                  <svg
-                    className="h-6 w-6 text-primary"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path d="M19 13l-7 7-7-7" />
-                  </svg>
-                </div>
-                <div className="flex-1 space-y-3">
-                  <div>
-                    <p className="text-sm text-gray-500">Pickup Location</p>
-                    <p className="font-medium text-gray-900">{pickupAddress}</p>
+                <div className="flex flex-col space-y-3">
+                  <div className="flex space-x-3">
+                    <div className="pt-1 ">
+                      <Image
+                        src="/marker.png"
+                        alt="marker loading"
+                        width={20}
+                        height={20}
+                      />
+                    </div>
+                    <div className="">
+                      <p className="text-sm text-gray-500">Pickup Location</p>
+                      <p className="font-medium text-gray-900">
+                        {pickupAddress}
+                      </p>
+                    </div>
                   </div>
                   <div className="border-t border-b my-4"></div>
                   <div>
-                    <p className="text-sm text-gray-500">Drop Location</p>
-                    <p className="font-medium text-gray-900">{dropLocation}</p>
+                    <div className="flex space-x-3">
+                      <div className="pt-1 ">
+                        <GrLocationPin className="text-2xl text-emerald-800" />
+                      </div>
+                      <div className="">
+                        <p className="text-sm text-gray-500">Drop Location</p>
+                        <p className="font-medium text-gray-900">
+                          {dropLocation}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Date & Time */}
               <div className="flex items-center gap-4">
-                <svg
-                  className="h-6 w-6 text-primary"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M6 12l6-6 6 6" />
-                </svg>
+                <IoIosTimer className="text-xl text-emerald-700" />
                 <div>
                   <p className="text-sm text-gray-500">Date & Time</p>
                   <p className="font-medium text-gray-900">{finalDateTime}</p>
                 </div>
               </div>
 
-              {/* Estimated Duration */}
               <div className="flex items-center gap-4">
-                <svg
-                  className="h-6 w-6 text-primary"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M3 12h18" />
-                </svg>
+              <GiPathDistance className="text-xl text-emerald-700"/>
+
                 <div>
                   <p className="text-sm text-gray-500">Estimated Duration</p>
                   <h2 className="text-white text-[15px]">
@@ -125,7 +121,8 @@ export default function BookingConfirmation() {
                       <span className="text-emerald-600">{distance} Km</span>
                     </span>
                     <span className="text-black pr-3 font-semibold">
-                      Duration: <span className="text-emerald-600">{time} Min</span>
+                      Duration:{" "}
+                      <span className="text-emerald-600">{time} Min</span>
                     </span>
                   </h2>
                 </div>
@@ -133,8 +130,7 @@ export default function BookingConfirmation() {
             </div>
           </div>
 
-          {/* Payment Details */}
-          <div className="bg-white p-6 rounded-lg shadow-lg m-4">
+          <div className="bg-white p-6 rounded-lg shadow-lg m-4 ">
             <h2 className="text-xl font-semibold mb-4">Payment Details</h2>
             <div className="space-y-3">
               <div className="flex justify-between text-gray-600">
@@ -151,7 +147,7 @@ export default function BookingConfirmation() {
                 <span>${paynentAmount}</span>
               </div>
               <div className="mt-4 bg-green-50 p-4 rounded-lg">
-                <div className="flex items-center gap-2 text-green-700">
+                {/* <div className="flex items-center gap-2 text-green-700">
                   <svg
                     className="h-4 w-4"
                     xmlns="http://www.w3.org/2000/svg"
@@ -164,13 +160,12 @@ export default function BookingConfirmation() {
                   <span className="text-sm font-medium">
                     Paid via Google Pay
                   </span>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Cancel Button */}
         <div className="relative">
           <button
             className="w-full px-6 py-2 border-2 border-transparent text-slate-gray-800 font-semibold rounded-lg transition duration-300 ease-in-out hover:border-slate-gray-800 bg-yellow-400 hover:bg-yellow-200"
@@ -179,7 +174,6 @@ export default function BookingConfirmation() {
             Cancel Ride
           </button>
 
-          {/* Conditionally render the image */}
         </div>
       </div>
       {showImage && (

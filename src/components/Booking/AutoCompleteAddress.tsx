@@ -140,6 +140,13 @@ const AutoCompleteAddress = () => {
         lan: result?.features[0]?.geometry?.coordinates[0],
         lat: result?.features[0]?.geometry?.coordinates[1],
       });
+
+      const coordinates = {
+        lan: result?.features[0]?.geometry?.coordinates[0],
+        lat: result?.features[0]?.geometry?.coordinates[1],
+      };
+      
+      localStorage.setItem('sourceCoordinates', JSON.stringify(coordinates));
     }, 500);
   };
 
@@ -160,6 +167,13 @@ const AutoCompleteAddress = () => {
         lan: result?.features[0]?.geometry?.coordinates[0],
         lat: result?.features[0]?.geometry?.coordinates[1],
       });
+
+      const coordinates = {
+        lan: result?.features[0]?.geometry?.coordinates[0],
+        lat: result?.features[0]?.geometry?.coordinates[1],
+      };
+      
+      localStorage.setItem('destCoordinates', JSON.stringify(coordinates));
     }, 500);
   };
 
