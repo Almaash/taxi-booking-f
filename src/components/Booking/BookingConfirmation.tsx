@@ -18,7 +18,6 @@ export default function BookingConfirmation() {
   const distance = localStorage.getItem("distance");
   const time = localStorage.getItem("time");
   const paynentAmount = localStorage.getItem("paynentAmount");
-  
 
   // formatted date and time ==================
   const currentDateTime = new Date();
@@ -47,12 +46,12 @@ export default function BookingConfirmation() {
   };
 
   return (
-    <div className="p-6 lg:p-8">
+    <div className="p-4 max-sm:bg-[#047857] max-sm:rounded-xl max-sm:w-full overflow-y-auto max-sm:h-[400px] max-sm:border-t-2 max-sm:border-black">
       <div className="mx-auto max-w-4xl space-y-4">
         <div className="bg-white p-6 rounded-lg shadow-lg">
           <div className="flex items-center justify-between">
             <div>
-              <span className="bg-green-100 text-green-700 p-2 rounded-md text-sm font-medium">
+              <span className="bg-green-10 max-sm:bg-transparent text-green-700 p-2 rounded-md text-sm font-medium">
                 Booking Confirmed
               </span>
             </div>
@@ -60,7 +59,7 @@ export default function BookingConfirmation() {
           </div>
         </div>
 
-        <div className="space-y-6 overflow-y-auto h-[400px] bg-gray-50 rounded">
+        <div className="space-y-6 bg-gray-50 rounded sm:overflow-y-auto sm:h-[400px]">
           <div className="bg-white p-6 m-4 rounded-lg shadow-lg">
             <div className="flex justify-between">
               <h2 className="text-xl font-semibold mb-4">Trip Details</h2>
@@ -146,8 +145,7 @@ export default function BookingConfirmation() {
                 <span>Total Amount</span>
                 <span>${paynentAmount}</span>
               </div>
-              <div className="mt-4 bg-green-50 p-4 rounded-lg">
-              </div>
+              <div className="mt-4 bg-green-50 p-4 rounded-lg"></div>
             </div>
           </div>
         </div>
@@ -163,7 +161,7 @@ export default function BookingConfirmation() {
         </div>
       </div>
       {showImage && (
-        <div className="flex flex-col absolute top-0 left-0 right-0 bottom-0 items-center justify-center z-10 bg-white">
+        <div className="flex items-center justify-center flex-col fixed  top-0 left-0 right-0 bottom-0   z-10 bg-white">
           <Image
             src="/success2.gif"
             alt="Cancelling..."
@@ -177,7 +175,7 @@ export default function BookingConfirmation() {
 
       {showModal && (
         <div className="flex items-center justify-center fixed top-0 left-0 right-0 bottom-0 bg-gray-500 bg-opacity-50 z-10">
-          <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center justify-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center justify-center max-sm:w-[90%]">
             <h1 className="text-xl mb-4">
               Are you sure you want to cancel this Cab?
             </h1>

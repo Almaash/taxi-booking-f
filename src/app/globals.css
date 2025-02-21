@@ -49,3 +49,19 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #555; /* Even darker */
 }
+
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 1s ease-out forwards;
+}

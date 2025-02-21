@@ -18,9 +18,9 @@ const Cars = ({setPayment}:any) => {
   return (
     <>
       <div className="mt-5">
-        <h2 className="text-gray-800 font-medium">Select Cars</h2>
+        <h2 className="text-gray-800 font-medium max-sm:text-white">Select Cars</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 overflow-y-auto max-h-[13rem] mt-1 bg-emerald-50 scrollbar-thin scrollbar-thumb-emerald-500 scrollbar-track-transparent">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 overflow-y-auto max-h-[13rem] mt-1 max-sm:bg-emerald-700 bg-emerald-50 scrollbar-thin scrollbar-thumb-emerald-500 scrollbar-track-transparent max-sm:w-full">
           {CarList.map((item, index) => (
             <div
               className={`m-4 p-4 border-[1px] rounded-md hover:border-emerald-400 cursor-pointer ${

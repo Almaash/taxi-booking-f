@@ -66,7 +66,7 @@ const MapBoxMapBooked = () => {
   return (
     <>
       <div className="">
-        <h1 className="pt-3"> </h1>
+        {/* <h1 className="pt-3"> </h1> */}
         <div className="rounded-lg overflow-hidden">
           <Map
             ref={mapRef}
