@@ -6,11 +6,11 @@ import { GrLocationPin } from "react-icons/gr";
 import { IoIosTimer } from "react-icons/io";
 import { GiPathDistance } from "react-icons/gi";
 
-
 export default function BookingConfirmation() {
   const { sourceAddress, destinationAddress, directationData } =
     useUserLocation();
   const [showImage, setShowImage] = useState(false);
+  const [showModal, setModal] = useState(false);
   const router = useRouter();
 
   const pickupAddress = localStorage.getItem("sourceAddress");
@@ -36,18 +36,18 @@ export default function BookingConfirmation() {
   // ====================================
 
   const handleCancelClick = () => {
+    setModal(false);
     setShowImage(true);
 
-    
     setTimeout(() => {
-      setShowImage(false); 
-      router.push(`/?status=cancelled`); 
+      setShowImage(false);
+      router.push(`/?status=cancelled`);
     }, 2000);
   };
 
   return (
     <div className="p-6 lg:p-8">
-      <div className="mx-auto max-w-4xl space-y-8">
+      <div className="mx-auto max-w-4xl space-y-4">
         <div className="bg-white p-6 rounded-lg shadow-lg">
           <div className="flex items-center justify-between">
             <div>
@@ -59,12 +59,11 @@ export default function BookingConfirmation() {
           </div>
         </div>
 
-        <div className="space-y-8 overflow-y-auto h-[400px] bg-gray-50 rounded">
+        <div className="space-y-6 overflow-y-auto h-[400px] bg-gray-50 rounded">
           <div className="bg-white p-6 m-4 rounded-lg shadow-lg">
             <div className="flex justify-between">
-
-            <h2 className="text-xl font-semibold mb-4">Trip Details</h2>
-            <GiPathDistance className="text-2xl text-black"/>
+              <h2 className="text-xl font-semibold mb-4">Trip Details</h2>
+              <GiPathDistance className="text-2xl text-black" />
             </div>
             <div className="space-y-6">
               <div className="flex items-start gap-4">
@@ -111,7 +110,7 @@ export default function BookingConfirmation() {
               </div>
 
               <div className="flex items-center gap-4">
-              <GiPathDistance className="text-xl text-emerald-700"/>
+                <GiPathDistance className="text-xl text-emerald-700" />
 
                 <div>
                   <p className="text-sm text-gray-500">Estimated Duration</p>
@@ -168,23 +167,48 @@ export default function BookingConfirmation() {
 
         <div className="relative">
           <button
-            className="w-full px-6 py-2 border-2 border-transparent text-slate-gray-800 font-semibold rounded-lg transition duration-300 ease-in-out hover:border-slate-gray-800 bg-yellow-400 hover:bg-yellow-200"
-            onClick={handleCancelClick}
+            className="w-full px-6 py-2 mt-2 border-2 border-transparent text-slate-gray-800 font-semibold rounded-lg transition duration-300 ease-in-out hover:border-slate-gray-800 bg-yellow-400 hover:bg-yellow-200"
+            // onClick={handleCancelClick}
+            onClick={() => setModal(true)}
           >
             Cancel Ride
           </button>
-
         </div>
       </div>
       {showImage && (
-        <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-10 bg-gray-500 bg-opacity-50">
+        <div className="flex flex-col absolute top-0 left-0 right-0 bottom-0 items-center justify-center z-10 bg-white">
           <Image
-            src="/success.gif"
+            src="/success2.gif"
             alt="Cancelling..."
             width={100}
             height={100}
-            className="w-64 h-52 rounded-full"
+            className="w-72 h-52 bg-transparent mix-blend-multiply"
           />
+          <h1 className="text-xl">Your ride has been cancelled. </h1>
+        </div>
+      )}
+
+      {showModal && (
+        <div className="flex items-center justify-center fixed top-0 left-0 right-0 bottom-0 bg-gray-500 bg-opacity-50 z-10">
+          <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center justify-center">
+            <h1 className="text-xl mb-4">
+              Are you sure you want to cancel this Cab?
+            </h1>
+            <div className="flex space-x-4">
+              <button
+                className="px-8 bg-emerald-600 hover:bg-emerald-800 text-white rounded-md"
+                onClick={handleCancelClick}
+              >
+                Yes
+              </button>
+              <button
+                className="px-8 py-2 hover:bg-gray-100  rounded-md border bg-gray-200"
+                onClick={() => setModal(false)}
+              >
+                No
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
