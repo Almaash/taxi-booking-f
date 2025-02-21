@@ -27,7 +27,7 @@ const CheckoutSuccess = () => {
             .retrievePaymentIntent(payment_intent_client_secret)
             .then(({ paymentIntent }: any) => {
               if (paymentIntent.status === "succeeded") {
-                alert("Payment Successful!");
+                console.log("Payment Successful!");
               } else {
                 alert("Payment failed or was not completed.");
               }
@@ -38,10 +38,10 @@ const CheckoutSuccess = () => {
   }, [payment_intent, payment_intent_client_secret]);
 
   return (
-    <div className="flex flex-col space-y-5 justify-center items-center h-screen">
+    <div className="flex flex-col  justify-center items-center h-screen">
       {redirect_status == "succeeded" ? (
         <>
-          <Image src="/success.gif" alt="LOGO" height="340" width="340" />
+          <Image src="/success2.gif" alt="LOGO" height="300" width="300" />
           <button
             onClick={() => router.push(`/?status=${redirect_status}`)}
             className="bg-yellow-400 hover:bg-yellow-600 px-9 py-2  rounded-lg"
