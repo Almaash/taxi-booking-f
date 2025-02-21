@@ -178,10 +178,10 @@ const AutoCompleteAddress = () => {
   };
 
   return (
-    <div className="">
+    <div className="max-sm:w-full">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label htmlFor="source" className="text-gray-500">
+          <label htmlFor="source" className="text-gray-500 max-sm:text-white">
             Where From?
           </label>
           <Controller
@@ -224,7 +224,7 @@ const AutoCompleteAddress = () => {
         </div>
 
         <div className="mt-5">
-          <label htmlFor="destination" className="text-gray-500">
+          <label htmlFor="destination" className="text-gray-500 max-sm:text-white">
             Where To?
           </label>
           <Controller

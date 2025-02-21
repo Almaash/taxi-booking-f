@@ -50,7 +50,7 @@ const NavBar = () => {
           CABZZ <Car className="h-6 w-6" />
         </h1>
       </div>
-      <div className="flex justify-end items-center gap-4">
+      <div className="flex justify-end items-center gap-4 text-white">
         <SignedOut>
           <div className="text-white hover:text-black transition duration-300 ease-in-out p-2 rounded">
             <SignInButton />
@@ -58,7 +58,7 @@ const NavBar = () => {
           <div className="text-white hover:text-black transition duration-300 ease-in-out p-2 rounded">
             <SignUpButton />
           </div>
-        </SignedOut>
+        </SignedOut >
         <SignedIn>
           <div className="flex gap-4">
             <UserButton />

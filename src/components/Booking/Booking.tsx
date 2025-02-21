@@ -26,9 +26,9 @@ const Booking = () => {
       {status === "succeeded" ? (
         <BookingConfirmation />
       ) : (
-        <div className="p-4">
-          <h2 className="text-[20px] font-semibold ">Booking</h2>
-          <div className="border-[1px] p-5 rounded-md h-[35rem]">
+        <div className="p-4 max-sm:bg-[#047857] max-sm:rounded-xl max-sm:w-full">
+          <h2 className="text-[20px] font-semibold max-sm:text-white">Booking</h2>
+          <div className="border-[1px] max-sm:border-[0px] p-5 rounded-md h-[35rem]">
             <AutoCompleteAddress />
             {directationData?.routes && <Cars setPayment={setPayment} />}
 

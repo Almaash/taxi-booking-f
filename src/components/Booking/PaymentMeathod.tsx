@@ -13,7 +13,7 @@ const PaymentMeathod = ({payment}:any) => {
   return (
     <>
       <div className="mt-1">
-        <h2 className="text-gray-800 font-medium">Payment Meathod</h2>
+        <h2 className="text-gray-800 font-medium max-sm:text-white">Payment Meathod</h2>
         <div className="grid grid-cols-5 gap-4 md:grid-cols-2 lg:grid-cols-5 mt-1">
           {paymentMeathodList.map((item, index) => (
             <div
@@ -36,7 +36,7 @@ const PaymentMeathod = ({payment}:any) => {
           ))}
         </div>
         <button
-            className="bg-emerald-600 text-white w-full rounded p-1 mt-2 hover:bg-emerald-800"
+            className="bg-emerald-600 max-sm:bg-white max-sm:text-black max-sm:hover:bg-emerald-200 text-white w-full rounded p-1 mt-2 hover:bg-emerald-800"
             onClick={() => router.push(`/pages/payment?totCost=${payment}`)}
           >
             Book

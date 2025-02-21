@@ -16,11 +16,11 @@ export default function LandingPage() {
       <main className="flex-1">
         {/* Hero Section */}
         <div className="w-full py-12 md:py-24 lg:py-32 bg-emerald-600">
-          <div className="ml-10 px-4 md:px-6">
-            <div className="flex">
-              <div className="flex flex-col justify-center space-y-4">
+          <div className="ml-10 max-sm:ml-0 px-4 md:px-6">
+            <div className="flex flex-col md:flex-row justify-between items-center">
+              <div className=" order-2 md:order-1 flex flex-col justify-center space-y-4 max-w-xl text-center md:text-left max-sm:items-center">
                 <div className="space-y-2">
-                  <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-white">
+                  <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl text-white">
                     Your Ride, Your Way
                   </h1>
                   <p className="max-w-[600px] text-soft-cream-500 md:text-xl">
@@ -28,17 +28,19 @@ export default function LandingPage() {
                     Experience the best ride-hailing service in town.
                   </p>
                 </div>
-                <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                <div className="flex flex-col md:flex-row gap-2 min-[400px]:flex-row">
                   <button
                     onClick={handleNavigate}
                     className="px-6 py-2 border-2 border-transparent text-slate-gray-800 font-semibold rounded-lg transition duration-300 ease-in-out hover:border-slate-gray-800 bg-emerald-400 hover:bg-emerald-200"
                   >
                     Book Now
                   </button>
-                  <button className="text-emerald-400 hover:text-emerald-500">Learn More...</button>
+                  <button className="text-emerald-400 hover:text-emerald-500">
+                    Learn More...
+                  </button>
                 </div>
               </div>
-              <div className="">
+              <div className="order-1 md:order-1 mt-6 md:mt-0 animate-slide-in-right">
                 <Image src={Img1} alt="LOGO" height="200" width="500" />
               </div>
             </div>
@@ -59,31 +61,39 @@ export default function LandingPage() {
                 </p>
               </div>
             </div>
-            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-4">
+            <div className="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 py-12">
               <div className="flex flex-col items-center space-y-2 text-center group">
                 <Clock className="h-12 w-12 text-emerald-500 transition-transform duration-300 ease-in-out group-hover:rotate-180" />
-                <h3 className="text-xl font-bold text-slate-gray-800">Quick Pickup</h3>
+                <h3 className="text-xl font-bold text-slate-gray-800">
+                  Quick Pickup
+                </h3>
                 <p className="text-sm text-slate-gray-500">
                   Average pickup time under 5 minutes
                 </p>
               </div>
               <div className="flex flex-col items-center space-y-2 text-center group">
                 <Shield className="h-12 w-12 text-emerald-500 transition-transform duration-300 ease-in-out group-hover:rotate-180" />
-                <h3 className="text-xl font-bold text-slate-gray-800">Safe Rides</h3>
+                <h3 className="text-xl font-bold text-slate-gray-800">
+                  Safe Rides
+                </h3>
                 <p className="text-sm text-slate-gray-500">
                   Verified drivers and real-time tracking
                 </p>
               </div>
               <div className="flex flex-col items-center space-y-2 text-center group">
                 <MapPin className="h-12 w-12 text-emerald-500 transition-transform duration-300 ease-in-out group-hover:rotate-180" />
-                <h3 className="text-xl font-bold text-slate-gray-800">Wide Coverage</h3>
+                <h3 className="text-xl font-bold text-slate-gray-800">
+                  Wide Coverage
+                </h3>
                 <p className="text-sm text-slate-gray-500">
                   Available in all major cities
                 </p>
               </div>
               <div className="flex flex-col items-center space-y-2 text-center group">
                 <Star className="h-12 w-12 text-emerald-500 transition-transform duration-300 ease-in-out group-hover:rotate-180" />
-                <h3 className="text-xl font-bold text-slate-gray-800">Top Rated</h3>
+                <h3 className="text-xl font-bold text-slate-gray-800">
+                  Top Rated
+                </h3>
                 <p className="text-sm text-slate-gray-500">
                   4.8/5 average user rating
                 </p>
