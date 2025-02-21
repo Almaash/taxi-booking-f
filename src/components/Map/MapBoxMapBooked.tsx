@@ -6,22 +6,12 @@ import { useUserLocation } from "@/context/UserLocationContext";
 import Image from "next/image";
 import MapBoxRoute from "./MapBoxRoute";
 import DistanceTime from "./DistanceTime";
-import { useSearchParams } from "next/navigation";
 
-const MapBoxMap = () => {
+const MapBoxMapBooked = () => {
   const mapRef = useRef<any>(null);
 
-  const {
-    userLocation,
-    sourceCoordinates,
-    destinationCoordinates,
-    setdirectationData,
-    directationData,
-  } = useUserLocation();
-
-  const searchParams = useSearchParams();
-
-  const status = searchParams.get("status");
+  const { userLocation, setdirectationData, directationData } =
+    useUserLocation();
 
   const destCoordinates: any = localStorage.getItem("destCoordinates");
   const sourceCoordinatesd: any = localStorage.getItem("sourceCoordinates");
@@ -34,31 +24,31 @@ const MapBoxMap = () => {
 
   // move the map to the source place
   useEffect(() => {
-    if (mapRef.current && sourceCoordinates) {
+    if (mapRef.current && srcCord) {
       mapRef.current.flyTo({
-        center: [sourceCoordinates?.lan, sourceCoordinates?.lat],
+        center: [srcCord?.lan, srcCord?.lat],
         duration: 2500,
       });
     }
-  }, [sourceCoordinates]);
+  }, []);
 
   // move the map to the destination place
   useEffect(() => {
-    if (mapRef.current && destinationCoordinates) {
+    if (mapRef.current && destCord) {
       mapRef.current.flyTo({
-        center: [destinationCoordinates?.lan, destinationCoordinates?.lat],
+        center: [destCord?.lan, destCord?.lat],
         duration: 2500,
       });
     }
 
-    if (sourceCoordinates && destinationCoordinates) {
+    if (srcCord && destCord) {
       getDirectionRoute();
     }
-  }, [destinationCoordinates]);
+  }, []);
 
   const getDirectionRoute = async () => {
     const res = await fetch(
-      `https://api.mapbox.com/directions/v5/mapbox/driving/${sourceCoordinates?.lan},${sourceCoordinates?.lat};${destinationCoordinates?.lan},${destinationCoordinates?.lat}?annotations=maxspeed&overview=full&geometries=geojson&access_token=pk.eyJ1Ijoia3VsZW1iZXRvdiIsImEiOiJjbHc2N2Nyc3kxcmpkMnJwZHNqcHFha2VwIn0.WXe-0CaUDyNjjzIj2Z3m0A`
+      `https://api.mapbox.com/directions/v5/mapbox/driving/${srcCord?.lan},${srcCord?.lat};${destCord?.lan},${destCord?.lat}?annotations=maxspeed&overview=full&geometries=geojson&access_token=pk.eyJ1Ijoia3VsZW1iZXRvdiIsImEiOiJjbHc2N2Nyc3kxcmpkMnJwZHNqcHFha2VwIn0.WXe-0CaUDyNjjzIj2Z3m0A`
     );
 
     const result = await res.json();
@@ -82,22 +72,18 @@ const MapBoxMap = () => {
             ref={mapRef}
             mapboxAccessToken="pk.eyJ1Ijoia3VsZW1iZXRvdiIsImEiOiJjbHc2N2Nyc3kxcmpkMnJwZHNqcHFha2VwIn0.WXe-0CaUDyNjjzIj2Z3m0A"
             initialViewState={{
-              longitude: sourceCoordinates?.lan
-                ? sourceCoordinates?.lan
-                : markerLongitude,
-              latitude: sourceCoordinates?.lat
-                ? sourceCoordinates?.lat
-                : markerLatitude,
+              longitude: srcCord?.lan ? srcCord?.lan : markerLongitude,
+              latitude: srcCord?.lat ? srcCord?.lat : markerLatitude,
               zoom: 14,
             }}
             style={{ width: "100%", height: 600, borderRadius: 10 }}
             mapStyle="mapbox://styles/mapbox/streets-v12"
           >
             {/* source coordinates */}
-            {sourceCoordinates != 0 ? (
+            {srcCord != 0 ? (
               <Marker
-                longitude={sourceCoordinates?.lan}
-                latitude={sourceCoordinates?.lat}
+                longitude={srcCord?.lan}
+                latitude={srcCord?.lat}
                 anchor="bottom"
               >
                 <Image
@@ -123,10 +109,10 @@ const MapBoxMap = () => {
             )}
 
             {/* destination coordinates */}
-            {destinationCoordinates != 0 && (
+            {destCord != 0 && (
               <Marker
-                longitude={destinationCoordinates?.lan}
-                latitude={destinationCoordinates?.lat}
+                longitude={destCord?.lan}
+                latitude={destCord?.lat}
                 anchor="bottom"
               >
                 <Image
@@ -155,4 +141,4 @@ const MapBoxMap = () => {
   );
 };
 
-export default MapBoxMap;
+export default MapBoxMapBooked;

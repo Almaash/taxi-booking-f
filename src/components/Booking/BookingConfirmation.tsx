@@ -7,8 +7,8 @@ import { IoIosTimer } from "react-icons/io";
 import { GiPathDistance } from "react-icons/gi";
 
 export default function BookingConfirmation() {
-  const { sourceAddress, destinationAddress, directationData } =
-    useUserLocation();
+  // const { sourceAddress, destinationAddress, directationData } =
+  //   useUserLocation();
   const [showImage, setShowImage] = useState(false);
   const [showModal, setModal] = useState(false);
   const router = useRouter();
@@ -18,6 +18,7 @@ export default function BookingConfirmation() {
   const distance = localStorage.getItem("distance");
   const time = localStorage.getItem("time");
   const paynentAmount = localStorage.getItem("paynentAmount");
+  
 
   // formatted date and time ==================
   const currentDateTime = new Date();
@@ -41,7 +42,7 @@ export default function BookingConfirmation() {
 
     setTimeout(() => {
       setShowImage(false);
-      router.push(`/?status=cancelled`);
+      router.push(`/`);
     }, 2000);
   };
 
@@ -146,20 +147,6 @@ export default function BookingConfirmation() {
                 <span>${paynentAmount}</span>
               </div>
               <div className="mt-4 bg-green-50 p-4 rounded-lg">
-                {/* <div className="flex items-center gap-2 text-green-700">
-                  <svg
-                    className="h-4 w-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path d="M7 5l5 5l5-5" />
-                  </svg>
-                  <span className="text-sm font-medium">
-                    Paid via Google Pay
-                  </span>
-                </div> */}
               </div>
             </div>
           </div>
