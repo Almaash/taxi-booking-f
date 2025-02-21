@@ -2,8 +2,13 @@
 import React from "react";
 import Booking from "./Booking/Booking";
 import MapBoxMap from "./Map/MapBoxMap";
+import { useSearchParams } from "next/navigation";
+import MapBoxMapBooked from "./Map/MapBoxMapBooked";
 
 const BookingPage = () => {
+  const searchParams = useSearchParams();
+  
+    const status = searchParams.get("status");
   return (
     <>
       <div className="">
@@ -12,7 +17,9 @@ const BookingPage = () => {
             <Booking />
           </div>
           <div className="order-1 md:order-2 col-span-2">
-            <MapBoxMap />
+
+            {status == "succeeded" ?  <MapBoxMapBooked /> :  <MapBoxMap />}
+           
           </div>
         </div>
       </div>

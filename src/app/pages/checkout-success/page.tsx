@@ -42,6 +42,7 @@ const CheckoutSuccess = () => {
       {redirect_status == "succeeded" ? (
         <>
           <Image src="/success2.gif" alt="LOGO" height="300" width="300" />
+        
           <button
             onClick={() => router.push(`/?status=${redirect_status}`)}
             className="bg-yellow-400 hover:bg-yellow-600 px-9 py-2  rounded-lg"
