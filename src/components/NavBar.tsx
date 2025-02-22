@@ -16,10 +16,8 @@ const NavBar = () => {
   const { signOut, user } = useClerk();
   const router = useRouter();
 
-  // Client-side mounted state
   const [isMounted, setIsMounted] = useState(false);
 
-  // Set isMounted to true once the component is mounted on the client
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -53,7 +51,6 @@ const NavBar = () => {
       </div>
 
       <div className="flex justify-end items-center gap-4 text-white">
-        {/* Render SignedOut only after component has mounted on the client */}
         {isMounted && (
           <SignedOut>
             <div className="text-white hover:text-black transition duration-300 ease-in-out p-2 rounded">
@@ -65,7 +62,6 @@ const NavBar = () => {
           </SignedOut>
         )}
 
-        {/* Render SignedIn only after component has mounted on the client */}
         {isMounted && (
           <SignedIn>
             <div className="flex gap-4">

@@ -7,8 +7,7 @@ import { useSearchParams } from "next/navigation";
 import BookingConfirmation from "./BookingConfirmation";
 
 const Booking = () => {
-  const { directationData, paymentAmount } =
-    useUserLocation();
+  const { directationData, paymentAmount } = useUserLocation();
   const [isVisible, setIsVisible] = useState(false);
   const [payment, setPayment] = useState<any>();
 
@@ -26,9 +25,11 @@ const Booking = () => {
       {status === "succeeded" ? (
         <BookingConfirmation />
       ) : (
-        <div className="p-4 max-sm:bg-[#047857] max-sm:rounded-xl max-sm:w-full">
-          <h2 className="text-[20px] font-semibold max-sm:text-white">Booking</h2>
-          <div className="border-[1px] max-sm:border-[0px] p-5 rounded-md h-[35rem]">
+        <div className="p-6 max-sm:p-2 max-sm:bg-[#047857] max-sm:rounded-t-xl max-sm:w-full max-sm:h-[20rem] bg-[#ECFDF5]">
+          <h2 className="text-[20px] font-semibold max-sm:text-white max-sm:p-2">
+            Booking
+          </h2>
+          <div className="border-[1px] max-sm:border-[0px] p-5 rounded-t-md h-[35rem] max-sm:h-[14rem] overflow-y-auto max-sm:bg-[#047857] bg-white">
             <AutoCompleteAddress />
             {directationData?.routes && <Cars setPayment={setPayment} />}
 

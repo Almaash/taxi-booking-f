@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Map, { Marker } from "react-map-gl/mapbox";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useUserLocation } from "@/context/UserLocationContext";
@@ -32,7 +32,19 @@ const MapBoxMap = () => {
   const markerLatitude: any = userLocation?.lat;
   const markerLongitude: any = userLocation?.lan;
 
-  // move the map to the source place
+
+  // ----------------------------------
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const height = windowWidth < 640 ? 300 : 600;
   useEffect(() => {
     if (mapRef.current && sourceCoordinates) {
       mapRef.current.flyTo({
@@ -41,6 +53,8 @@ const MapBoxMap = () => {
       });
     }
   }, [sourceCoordinates]);
+
+  // ----------------------------------
 
   // move the map to the destination place
   useEffect(() => {
@@ -65,13 +79,16 @@ const MapBoxMap = () => {
     setdirectationData(result);
   };
 
-  if (markerLatitude == undefined && markerLongitude == undefined) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <Image src="/MapGrowing.gif" alt="map loading" width={30} height={30} />
-      </div>
-    );
-  }
+  // console.log(markerLatitude,"23.3554049")
+  // console.log(markerLongitude,"85.3606529")
+
+  // if (markerLatitude == undefined && markerLongitude == undefined) {
+  //   return (
+  //     <div className="flex justify-center items-center h-screen">
+  //       <Image src="/MapGrowing.gif" alt="map loading" width={30} height={30} />
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
@@ -81,22 +98,21 @@ const MapBoxMap = () => {
             ref={mapRef}
             mapboxAccessToken="pk.eyJ1Ijoia3VsZW1iZXRvdiIsImEiOiJjbHc2N2Nyc3kxcmpkMnJwZHNqcHFha2VwIn0.WXe-0CaUDyNjjzIj2Z3m0A"
             initialViewState={{
-              longitude: sourceCoordinates?.lan
-                ? sourceCoordinates?.lan
-                : markerLongitude,
-              latitude: sourceCoordinates?.lat
+              longitude: sourceCoordinates?.lon !== undefined
+                ? sourceCoordinates?.lon
+                : (markerLongitude !== undefined ? markerLongitude : 85.3606529),
+              latitude: sourceCoordinates?.lat !== undefined
                 ? sourceCoordinates?.lat
-                : markerLatitude,
+                : (markerLatitude !== undefined ? markerLatitude : 23.3554049),
               zoom: 14,
             }}
-            style={{ width: "100%", height: 600, borderRadius: 10 }}
+            style={{ width: "100%", height: height, borderRadius: 10 }}
             mapStyle="mapbox://styles/mapbox/streets-v12"
           >
-            {/* source coordinates */}
             {sourceCoordinates != 0 ? (
               <Marker
                 longitude={sourceCoordinates?.lan}
-                latitude={sourceCoordinates?.lat}
+                latitude={sourceCoordinates?.lat }
                 anchor="bottom"
               >
                 <Image
@@ -108,8 +124,8 @@ const MapBoxMap = () => {
               </Marker>
             ) : (
               <Marker
-                longitude={markerLongitude}
-                latitude={markerLatitude}
+                longitude={markerLongitude || 85.3096}
+                latitude={markerLatitude || 23.3441}
                 anchor="bottom"
               >
                 <Image
@@ -121,7 +137,6 @@ const MapBoxMap = () => {
               </Marker>
             )}
 
-            {/* destination coordinates */}
             {destinationCoordinates != 0 && (
               <Marker
                 longitude={destinationCoordinates?.lan}
@@ -145,9 +160,14 @@ const MapBoxMap = () => {
           </Map>
         </div>
         {directationData?.routes && (
-          <div className="absolute bottom-[11px] z-20 right-[5px] hidden md:block">
+          <>
+          <div className="absolute bottom-[25px] z-20 right-[33px] hidden md:block ">
             <DistanceTime />
           </div>
+           <div className="absolute z-20 right-[10px] top-[25px] max-sm:top-[15px] md:top-auto md:right-[33px] md:bottom-[5px] md:hidden">
+           <DistanceTime />
+         </div>
+         </>
         )}
       </div>
     </>

@@ -10,9 +10,9 @@ const BookingPage = () => {
   const status = searchParams.get("status");
 
   return (
-    <div className="max-sm:px-0 px-4 lg:px-8">
-      <div className="max-sm:relative grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="max-sm:absolute z-50  top-72 order-2 md:order-1 w-full">
+    <div className="max-sm:px-0  ">
+      <div className="max-sm:relative grid grid-cols-1 md:grid-cols-3 gap-6 ">
+        <div className="max-sm:absolute z-50  top-72 order-2 md:order-1 w-full  ">
           <Booking />
         </div>
 
