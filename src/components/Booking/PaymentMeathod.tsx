@@ -36,7 +36,7 @@ const PaymentMeathod = ({payment}:any) => {
           ))}
         </div>
         <button
-            className="bg-emerald-600 max-sm:bg-white max-sm:text-black max-sm:hover:bg-emerald-200 text-white w-full rounded p-1 mt-2 hover:bg-emerald-800"
+            className="bg-emerald-600 max-sm:bg-white max-sm:text-black max-sm:hover:bg-emerald-200 text-white w-full rounded p-1 mt-2 hover:bg-emerald-800 max-sm:p-3 max-sm:mt-4"
             onClick={() => router.push(`/pages/payment?totCost=${payment}`)}
           >
             Book

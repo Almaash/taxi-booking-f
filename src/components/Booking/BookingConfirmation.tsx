@@ -46,10 +46,11 @@ export default function BookingConfirmation() {
   };
 
   return (
-    <div className="p-4 max-sm:bg-[#047857] max-sm:rounded-xl max-sm:w-full overflow-y-auto max-sm:h-[400px] max-sm:border-t-2 max-sm:border-black">
+    <div className="p-4 max-sm:bg-[#047857] max-sm:rounded-t-xl max-sm:w-full max-sm:h-[20rem] overflow-y-auto">
+    {/* <div className="p-4 max-sm:bg-[#047857] max-sm:rounded-t-xl max-sm:rounded-xl max-sm:w-full overflow-y-auto max-sm:h-[400px] max-sm:border-t-2 "> */}
       <div className="mx-auto max-w-4xl space-y-4">
-        <div className="bg-white p-6 rounded-lg shadow-lg">
-          <div className="flex items-center justify-between">
+        <div className="bg-white p-6 max-sm:p-2 rounded-lg shadow-lg">
+          <div className="flex items-center max-sm:flex-col max-sm:justify-start justify-between">
             <div>
               <span className="bg-green-10 max-sm:bg-transparent text-green-700 p-2 rounded-md text-sm font-medium">
                 Booking Confirmed
@@ -59,8 +60,8 @@ export default function BookingConfirmation() {
           </div>
         </div>
 
-        <div className="space-y-6 bg-gray-50 rounded sm:overflow-y-auto sm:h-[400px]">
-          <div className="bg-white p-6 m-4 rounded-lg shadow-lg">
+        <div className="space-y-6 bg-gray-50 max-sm:bg-white rounded sm:overflow-y-auto sm:h-[400px]">
+          <div className="bg-white p-6 max-sm:p-2 m-4 max-sm:m-2 rounded-lg shadow-lg">
             <div className="flex justify-between">
               <h2 className="text-xl font-semibold mb-4">Trip Details</h2>
               <GiPathDistance className="text-2xl text-black" />
@@ -129,7 +130,7 @@ export default function BookingConfirmation() {
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-lg m-4 ">
+          <div className="bg-white p-6 rounded-lg shadow-lg m-4 max-sm:m-2 max-sm:p-2 ">
             <h2 className="text-xl font-semibold mb-4">Payment Details</h2>
             <div className="space-y-3">
               <div className="flex justify-between text-gray-600">

@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
 import axios from "axios";
 import { useUserLocation } from "@/context/UserLocationContext";
+import { CiLocationOn } from "react-icons/ci";
 
 interface LocationData {
   display_name: string;
@@ -30,7 +31,7 @@ const AutoCompleteAddress = () => {
     setDestinationCoordinates,
     setSourceAddress,
     setDestinationAddress,
-    destinationAddress
+    destinationAddress,
   } = useUserLocation();
 
   const handleSearch = async (
@@ -145,8 +146,8 @@ const AutoCompleteAddress = () => {
         lan: result?.features[0]?.geometry?.coordinates[0],
         lat: result?.features[0]?.geometry?.coordinates[1],
       };
-      
-      localStorage.setItem('sourceCoordinates', JSON.stringify(coordinates));
+
+      localStorage.setItem("sourceCoordinates", JSON.stringify(coordinates));
     }, 500);
   };
 
@@ -172,8 +173,8 @@ const AutoCompleteAddress = () => {
         lan: result?.features[0]?.geometry?.coordinates[0],
         lat: result?.features[0]?.geometry?.coordinates[1],
       };
-      
-      localStorage.setItem('destCoordinates', JSON.stringify(coordinates));
+
+      localStorage.setItem("destCoordinates", JSON.stringify(coordinates));
     }, 500);
   };
 
@@ -182,95 +183,115 @@ const AutoCompleteAddress = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="source" className="text-gray-500 max-sm:text-white">
-            Where From?
+            Pickup Location
           </label>
-          <Controller
-            name="source"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <div className="">
-                <input
-                  {...field}
-                  type="text"
-                  onChange={(e) => {
-                    field.onChange(e);
-                    onChange(e.target.value, "source");
-                  }}
-                  className="bg-white  border-[1px] w-full rounded-md outline-none focus:border-emerald-600 p-2"
-                  placeholder="search for source..."
-                />
+          <div className="relative">
+            <CiLocationOn className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+            <Controller
+              name="source"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <div className="">
+                  <input
+                    {...field}
+                    type="text"
+                    onChange={(e) => {
+                      const inputValue = e.target.value;
 
-                {sourceData?.length > 0 && !isSourceSelected && (
-                  <ul className=" w-full bg-white border border-gray-300 rounded shadow-lg max-h-60 overflow-y-auto mt-1">
-                    {sourceData?.map((item: LocationData, index) => (
-                      <li
-                        key={index}
-                        onClick={() => {
-                          handleSelectAddress(item, "source"),
-                            onSourceAddressClick(item);
-                            localStorage.setItem("sourceAddress", sourceAddress);
-                        }}
-                        className="p-2 cursor-pointer hover:bg-gray-200"
-                      >
-                        {item.display_name}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            )}
-          />
+                      field.onChange(e);
+
+                      onChange(inputValue, "source");
+
+                      if (inputValue === "") {
+                        setIsSourceSelected(false);
+                      }
+                    }}
+                    className="bg-white pl-9  border-[1px] w-full rounded-md outline-none focus:border-emerald-600 p-2"
+                    placeholder="search for source..."
+                  />
+
+                  {sourceData?.length > 0 && !isSourceSelected && (
+                    <ul className=" w-full bg-white border border-gray-300 rounded shadow-lg max-h-60 overflow-y-auto mt-1">
+                      {sourceData?.map((item: LocationData, index) => (
+                        <li
+                          key={index}
+                          onClick={() => {
+                            handleSelectAddress(item, "source"),
+                              onSourceAddressClick(item);
+                            localStorage.setItem(
+                              "sourceAddress",
+                              sourceAddress
+                            );
+                          }}
+                          className="p-2 cursor-pointer hover:bg-gray-200"
+                        >
+                          {item.display_name}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
+            />
+          </div>
         </div>
 
         <div className="mt-5">
-          <label htmlFor="destination" className="text-gray-500 max-sm:text-white">
-            Where To?
+          <label
+            htmlFor="destination"
+            className="text-gray-500 max-sm:text-white"
+          >
+            Destination
           </label>
-          <Controller
-            name="destination"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <div className="">
-                <input
-                  {...field}
-                  type="text"
-                  onChange={(e) => {
-                    field.onChange(e);
-                    onChange(e.target.value, "destination");
-                  }}
-                  className="bg-white  border-[1px] w-full rounded-md outline-none focus:border-emerald-600 p-2"
-                  placeholder="search for destination..."
-                />
+          <div className="relative">
+            <CiLocationOn className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+            <Controller
+              name="destination"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <div className="">
+                  <input
+                    {...field}
+                    type="text"
+                    onChange={(e) => {
+                      const inputValue = e.target.value;
 
-                {destData?.length > 0 && !isDestSelected && (
-                  <ul className=" w-full bg-white border border-gray-300 rounded shadow-lg max-h-60 overflow-y-auto mt-1">
-                    {destData?.map((item: LocationData, index) => (
-                      <li
-                        key={index}
-                        onClick={() => {
-                          handleSelectAddress(item, "destination"),
-                            onDetinationAddressClick(item);
+                      field.onChange(e);
+
+                      onChange(inputValue, "destination");
+                      if (inputValue === "") {
+                        setIsDestSelected(false);
+                      }
+                    }}
+                    className="bg-white pl-9  border-[1px] w-full rounded-md outline-none focus:border-emerald-600 p-2"
+                    placeholder="search for destination..."
+                  />
+
+                  {destData?.length > 0 && !isDestSelected && (
+                    <ul className=" w-full bg-white border border-gray-300 rounded shadow-lg max-h-60 overflow-y-auto mt-1">
+                      {destData?.map((item: LocationData, index) => (
+                        <li
+                          key={index}
+                          onClick={() => {
+                            handleSelectAddress(item, "destination"),
+                              onDetinationAddressClick(item);
                             localStorage.setItem("destination", destination);
-                        }}
-                        className="p-2 cursor-pointer hover:bg-gray-200"
-                      >
-                        {item.display_name}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            )}
-          />
+                          }}
+                          className="p-2 cursor-pointer hover:bg-gray-200"
+                        >
+                          {item.display_name}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
+            />
+          </div>
         </div>
       </form>
-
-      {/* <div className="mt-10">
-        <p>Selected Source: {sourceAddress}</p> <br /><br />
-        <p>Selected Destination: {destination}</p>
-      </div> */}
     </div>
   );
 };

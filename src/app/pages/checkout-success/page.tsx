@@ -1,11 +1,13 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { loadStripe } from "@stripe/stripe-js";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 
 const CheckoutSuccess = () => {
+
+  const [buttonText, setButtonText] = useState("Track Your Cab");
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -14,6 +16,14 @@ const CheckoutSuccess = () => {
     "payment_intent_client_secret"
   );
   const redirect_status = searchParams.get("redirect_status");
+
+  const handleClick = () => {
+    setButtonText("Redirecting...");
+    
+    setTimeout(() => {
+      router.push(`/?status=${redirect_status}`);
+    }, 1000); 
+  };
 
   useEffect(() => {
     if (payment_intent && payment_intent_client_secret) {
@@ -38,16 +48,16 @@ const CheckoutSuccess = () => {
   }, [payment_intent, payment_intent_client_secret]);
 
   return (
-    <div className="flex flex-col  justify-center items-center h-screen">
+    <div className="flex flex-col  justify-center items-center h-screen max-sm:h-full max-sm:mt-20">
       {redirect_status == "succeeded" ? (
         <>
           <Image src="/success2.gif" alt="LOGO" height="300" width="300" />
         
           <button
-            onClick={() => router.push(`/?status=${redirect_status}`)}
+            onClick={handleClick}
             className="bg-yellow-400 hover:bg-yellow-600 px-9 py-2  rounded-lg"
           >
-            Track Your Cab
+            {buttonText}
           </button>
         </>
       ) : (

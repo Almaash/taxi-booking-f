@@ -23,7 +23,7 @@ const Cars = ({setPayment}:any) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 overflow-y-auto max-h-[13rem] mt-1 max-sm:bg-emerald-700 bg-emerald-50 scrollbar-thin scrollbar-thumb-emerald-500 scrollbar-track-transparent max-sm:w-full">
           {CarList.map((item, index) => (
             <div
-              className={`m-4 p-4 border-[1px] rounded-md hover:border-emerald-400 cursor-pointer ${
+              className={`m-4 p-4 max-sm:p-1 max-sm:m-2 border-[1px] rounded-md hover:border-emerald-400 cursor-pointer ${
                 index === selectedCars
                   ? "border-emerald-500 bg-emerald-500 border-[2px] text-white"
                   : "border-gray-300 bg-white "

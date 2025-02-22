@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Map, { Marker } from "react-map-gl/mapbox";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useUserLocation } from "@/context/UserLocationContext";
@@ -21,6 +21,30 @@ const MapBoxMapBooked = () => {
 
   const markerLatitude: any = userLocation?.lat;
   const markerLongitude: any = userLocation?.lan;
+
+
+  //----------------------------------
+  
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  
+    useEffect(() => {
+      const handleResize = () => setWindowWidth(window.innerWidth);
+      window.addEventListener('resize', handleResize);
+      
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+  
+    const height = windowWidth < 640 ? 300 : 600;
+    useEffect(() => {
+      if (mapRef.current && srcCord) {
+        mapRef.current.flyTo({
+          center: [srcCord?.lan, srcCord?.lat],
+          duration: 2500,
+        });
+      }
+    }, [srcCord]);
+  
+    // ----------------------------------
 
   // move the map to the source place
   useEffect(() => {
@@ -55,13 +79,13 @@ const MapBoxMapBooked = () => {
     setdirectationData(result);
   };
 
-  if (markerLatitude == undefined && markerLongitude == undefined) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <Image src="/MapGrowing.gif" alt="map loading" width={30} height={30} />
-      </div>
-    );
-  }
+  // if (markerLatitude == undefined && markerLongitude == undefined) {
+  //   return (
+  //     <div className="flex justify-center items-center h-screen">
+  //       <Image src="/MapGrowing.gif" alt="map loading" width={30} height={30} />
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
@@ -76,7 +100,7 @@ const MapBoxMapBooked = () => {
               latitude: srcCord?.lat ? srcCord?.lat : markerLatitude,
               zoom: 14,
             }}
-            style={{ width: "100%", height: 600, borderRadius: 10 }}
+            style={{ width: "100%", height: height, borderRadius: 10 }}
             mapStyle="mapbox://styles/mapbox/streets-v12"
           >
             {/* source coordinates */}
