@@ -15,6 +15,7 @@ const page = () => {
   const [timeDuratation, setTimeDuratation] = useState<any>();
 
   const [isClient, setIsClient] = useState(false);
+  const [afterBookingDirectationData, setAfterBookingDdirectationData] = useState<any>([]);
 
   useEffect(() => {
     setIsClient(true); // Set to true only after the component mounts
@@ -55,7 +56,10 @@ const page = () => {
         setCarDetails,
         timeDuratation,
         setTimeDuratation,
+        afterBookingDirectationData,
+        setAfterBookingDdirectationData,
       }}
+    
     >
       <BookingPage />
     </UserLocationContext.Provider>
