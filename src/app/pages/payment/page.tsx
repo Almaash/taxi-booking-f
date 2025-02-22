@@ -3,11 +3,10 @@ import CheckoutForm from "@/components/Payment/CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useSearchParams } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 
-const page = () => {
+const PaymentPage = () => {
   const searchParams = useSearchParams();
-
   const totCost = searchParams.get("totCost");
 
   const stripePromise = loadStripe(
@@ -16,7 +15,7 @@ const page = () => {
 
   const amountInPaise = totCost ? Math.round(parseFloat(totCost) * 100) : 0;
 
-  console.log(amountInPaise)
+  console.log(amountInPaise);
 
   const option: any = {
     mode: "payment",
@@ -31,4 +30,10 @@ const page = () => {
   );
 };
 
-export default page;
+const PaymentPageWithSuspense = () => (
+  <Suspense fallback={<h1>Loading...</h1>}>
+    <PaymentPage />
+  </Suspense>
+);
+
+export default PaymentPageWithSuspense;
