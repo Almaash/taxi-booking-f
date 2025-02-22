@@ -47,7 +47,7 @@ const CheckoutForm = () => {
 
     const { clientSecret } = await res.json();
 
-    const { error, paymentIntent } = await stripe.confirmPayment({
+    const { error: confirmError, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
         return_url: `http://${window.location.host}/pages/checkout-success`, // Ensure this URL is where you want to redirect
@@ -56,12 +56,13 @@ const CheckoutForm = () => {
       clientSecret,
     });
 
-    if (error) {
-      console.log(error, "error");
+    if (confirmError) {
+      console.log(confirmError, "error");
     } else if (paymentIntent?.status === "succeeded") {
       alert("Payment Successful!");
     } else {
       console.log(paymentIntent?.status);
+      setButtonText("Pay");
     }
   };
 
