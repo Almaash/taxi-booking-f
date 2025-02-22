@@ -76,7 +76,6 @@ const MapBoxMap = () => {
   return (
     <>
       <div className="">
-        {/* <h1 className="pt-3"> </h1> */}
         <div className="rounded-lg overflow-hidden mt-2 max-sm:mt-0">
           <Map
             ref={mapRef}
