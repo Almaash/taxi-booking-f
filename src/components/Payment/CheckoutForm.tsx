@@ -58,10 +58,11 @@ const CheckoutForm = () => {
 
     if (result.error) {
       console.log(result.error, "error");
-    } else if (result.paymentIntent?.status === "succeeded") {
-      alert("Payment Successful!");
-    } else {
-      console.log(result.paymentIntent?.status);
+    // } else if (result.paymentIntent?.status === "succeeded") {
+    //   alert("Payment Successful!");
+    } 
+    else {
+      // console.log(result.paymentIntent?.status);
       setButtonText("Pay");
     }
   };
