@@ -25,13 +25,14 @@ const Booking = () => {
       {status === "succeeded" ? (
         <BookingConfirmation />
       ) : (
-        <div className="p-6 max-sm:p-2 max-sm:bg-[#047857] max-sm:rounded-t-xl max-sm:w-full max-sm:h-screen bg-[#ECFDF5]">
+        <div className="p-4 max-sm:bg-[#047857] max-sm:rounded-t-xl max-sm:w-full max-sm:h-[23.5rem] bg-[#f8fbfa]">
           <h2 className="text-[20px] font-semibold max-sm:text-white max-sm:p-2">
             Booking
           </h2>
-          <div className="border-[1px] max-sm:border-[0px] p-5 rounded-t-md h-[35rem] max-sm:h-[14rem] overflow-y-auto max-sm:bg-[#047857] bg-white">
+          <div className="border-[1px] max-sm:border-[0px] p-5 rounded-t-md  max-sm:h-[19rem] overflow-y-auto max-sm:bg-[#047857] bg-white">
             <AutoCompleteAddress />
-            {directationData?.routes && <Cars setPayment={setPayment} />}
+            <Cars setPayment={setPayment} />
+            {/* {directationData?.routes && <Cars setPayment={setPayment} />} */}
 
             {paymentAmount.length > 0 && (
               <div
