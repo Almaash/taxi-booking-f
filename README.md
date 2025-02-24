@@ -4,7 +4,7 @@
 
 ### Your Ride, Your Way
 
-[![Next.js](https://img.shields.io/badge/Made%20with-Next.js-000000?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Clerk Auth](https://img.shields.io/badge/Clerk-Authentication-purple?style=flat-square)](https://clerk.dev/)
 [![MapBox](https://img.shields.io/badge/MapBox-Maps-000000?style=flat-square&logo=mapbox)](https://www.mapbox.com/)
