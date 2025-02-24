@@ -46,8 +46,8 @@ export default function BookingConfirmation() {
   };
 
   return (
-    <div className="p-4 max-sm:bg-[#047857] max-sm:rounded-t-xl max-sm:w-full max-sm:h-screen overflow-y-auto">
-    {/* <div className="p-4 max-sm:bg-[#047857] max-sm:rounded-t-xl max-sm:rounded-xl max-sm:w-full overflow-y-auto max-sm:h-[400px] max-sm:border-t-2 "> */}
+    // <div className="p-4 max-sm:bg-[#047857] max-sm:rounded-t-xl max-sm:w-full max-sm:h-screen overflow-y-auto">
+    <div className="p-4 max-sm:bg-[#047857] max-sm:rounded-t-xl max-sm:rounded-xl max-sm:w-full overflow-y-auto max-sm:h-[400px] max-sm:border-t-2 ">
       <div className="mx-auto max-w-4xl space-y-4">
         <div className="bg-white p-6 max-sm:p-2 rounded-lg shadow-lg">
           <div className="flex items-center max-sm:flex-col max-sm:justify-start justify-between">

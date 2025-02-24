@@ -25,7 +25,7 @@ const Booking = () => {
       {status === "succeeded" ? (
         <BookingConfirmation />
       ) : (
-        <div className="p-4 max-sm:bg-[#047857] max-sm:rounded-t-xl max-sm:w-full max-sm:h-[23.5rem] bg-[#f8fbfa]">
+        <div className="p-4 max-sm:bg-[#047857] max-sm:rounded-t-xl max-sm:w-full max-sm:h-[400px] bg-[#f8fbfa]">
           <h2 className="text-[20px] font-semibold max-sm:text-white max-sm:p-2">
             Booking
           </h2>
