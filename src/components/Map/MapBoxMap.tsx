@@ -32,16 +32,15 @@ const MapBoxMap = () => {
   const markerLatitude: any = userLocation?.lat;
   const markerLongitude: any = userLocation?.lan;
 
-
   // ----------------------------------
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const height = windowWidth < 640 ? 300 : 600;
@@ -98,12 +97,18 @@ const MapBoxMap = () => {
             ref={mapRef}
             mapboxAccessToken="pk.eyJ1Ijoia3VsZW1iZXRvdiIsImEiOiJjbHc2N2Nyc3kxcmpkMnJwZHNqcHFha2VwIn0.WXe-0CaUDyNjjzIj2Z3m0A"
             initialViewState={{
-              longitude: sourceCoordinates?.lon !== undefined
-                ? sourceCoordinates?.lon
-                : (markerLongitude !== undefined ? markerLongitude : 85.3606529),
-              latitude: sourceCoordinates?.lat !== undefined
-                ? sourceCoordinates?.lat
-                : (markerLatitude !== undefined ? markerLatitude : 23.3554049),
+              longitude:
+                sourceCoordinates?.lon !== undefined
+                  ? sourceCoordinates?.lon
+                  : markerLongitude !== undefined
+                  ? markerLongitude
+                  : 85.3606529,
+              latitude:
+                sourceCoordinates?.lat !== undefined
+                  ? sourceCoordinates?.lat
+                  : markerLatitude !== undefined
+                  ? markerLatitude
+                  : 23.3554049,
               zoom: 14,
             }}
             style={{ width: "100%", height: height, borderRadius: 10 }}
@@ -112,7 +117,7 @@ const MapBoxMap = () => {
             {sourceCoordinates != 0 ? (
               <Marker
                 longitude={sourceCoordinates?.lan}
-                latitude={sourceCoordinates?.lat }
+                latitude={sourceCoordinates?.lat}
                 anchor="bottom"
               >
                 <Image
@@ -161,13 +166,20 @@ const MapBoxMap = () => {
         </div>
         {directationData?.routes && (
           <>
-          <div className="absolute bottom-[25px] z-20 right-[33px] hidden md:block ">
+            {/* <div className="absolute bottom-[25px] z-20 right-[33px] hidden md:block ">
             <DistanceTime />
           </div>
            <div className="absolute z-20 right-[10px] top-[25px] max-sm:top-[15px] md:top-auto md:right-[33px] md:bottom-[5px] md:hidden">
            <DistanceTime />
-         </div>
-         </>
+         </div> */}
+            <div className="fixed bottom-[25px] z-20 right-[33px] hidden md:block">
+              <DistanceTime />
+            </div>
+
+            <div className="fixed z-10  top-[15px] max-sm:top-[75px] max-sm:right-[10px] max-sm:bottom-[10px] md:top-auto md:right-[33px] md:bottom-[5px] md:hidden inline-block">
+              <DistanceTime />
+            </div>
+          </>
         )}
       </div>
     </>
