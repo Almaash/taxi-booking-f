@@ -47,7 +47,7 @@ export default function BookingConfirmation() {
 
   return (
     // <div className="p-4 max-sm:bg-[#047857] max-sm:rounded-t-xl max-sm:w-full max-sm:h-screen overflow-y-auto">
-    <div className="p-4 max-sm:bg-[#047857] max-sm:rounded-t-xl max-sm:rounded-xl max-sm:w-full overflow-y-auto max-sm:h-[400px] max-sm:border-t-2 ">
+    <div className="p-4 max-sm:bg-[#047857] max-sm:rounded-t-xl max-sm:rounded-xl max-sm:w-full overflow-y-auto max-sm:h-[400px] max-sm:border-t-2">
       <div className="mx-auto max-w-4xl space-y-4">
         <div className="bg-white p-6 max-sm:p-2 rounded-lg shadow-lg">
           <div className="flex items-center max-sm:flex-col max-sm:justify-start justify-between">
@@ -66,7 +66,7 @@ export default function BookingConfirmation() {
               <h2 className="text-xl font-semibold mb-4">Trip Details</h2>
               <GiPathDistance className="text-2xl text-black" />
             </div>
-            <div className="space-y-6">
+            <div className="space-y-6 ">
               <div className="flex items-start gap-4">
                 <div className="flex flex-col space-y-3">
                   <div className="flex space-x-3">
