@@ -31,8 +31,8 @@ const Booking = () => {
           </h2>
           <div className="border-[1px] max-sm:border-[0px] p-5 rounded-t-md  max-sm:h-[19rem] overflow-y-auto max-sm:bg-[#047857] bg-white">
             <AutoCompleteAddress />
-            <Cars setPayment={setPayment} />
-            {/* {directationData?.routes && <Cars setPayment={setPayment} />} */}
+            {/* <Cars setPayment={setPayment} /> */}
+            {directationData?.routes && <Cars setPayment={setPayment} />}
 
             {paymentAmount.length > 0 && (
               <div
