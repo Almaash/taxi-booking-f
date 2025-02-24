@@ -6,10 +6,10 @@ Features
 ![1](https://github.com/user-attachments/assets/6a6e8a51-0d67-4e66-8e7e-79ae47bc057e)
 
 
-Modern and engaging homepage design
-Clear value proposition with "Your Ride, Your Way" messaging
-Multiple vehicle options displayed (Car, Auto-rickshaw, Motorcycle)
-Easy access to Sign In and Sign Up options
+- Modern and engaging homepage design
+- Clear value proposition with "Your Ride, Your Way" messaging
+- Multiple vehicle options displayed (Car, Auto-rickshaw, Motorcycle)
+- Easy access to Sign In and Sign Up options
 2. Authentication
 ![2](https://github.com/user-attachments/assets/f16e2985-24ac-4665-a85e-4b8f8aa13d07)
 
