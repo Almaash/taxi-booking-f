@@ -69,8 +69,5 @@ Cash,
 - Getting Started
 (Add installation and setup instructions here)
 
-Contributing
-(Add contribution guidelines here)
+[linkedin!](http://linkedin.com/in/almaash-alam-a96a291ab)
 
-License
-(Add license information here)
