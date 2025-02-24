@@ -33,11 +33,11 @@ Features
 - Transparent pricing system
 - Real-time distance and duration calculations
 - Multiple payment options:
-GPay, 
-PhonePe,
-Mastercard,
-Visa,
-Cash,
+-- GPay, 
+-- PhonePe,
+-- Mastercard,
+-- Visa,
+-- Cash,
 
 4. Secure Payment Processing
 ![4](https://github.com/user-attachments/assets/b70ca363-831f-4cb5-91ac-18ab08253aa9)
