@@ -63,4 +63,4 @@ CABZZ is a modern ride-hailing application that provides seamless transportation
 
 ## Getting Started
 
-(Add installation and setup instructions here)
+(Add installation and setup)
