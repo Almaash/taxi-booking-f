@@ -29,7 +29,7 @@ A next-generation ride-hailing platform that revolutionizes urban transportation
 - 📱 Fully responsive layout
 </details>
 
-<summary>🔐 Secure Authentication</summary>
+🔐 Secure Authentication
 
 ![Authentication](https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-daAI5NNCr05eSllawTDoE5TElocm2a.png)
 
@@ -38,7 +38,7 @@ A next-generation ride-hailing platform that revolutionizes urban transportation
 - ✉️ Email authentication
 - 🛡️ Enterprise-grade security
 
-<summary>📍 Intelligent Booking System</summary>
+📍 Intelligent Booking System
 
 ![Booking System](https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-MwgQUskeEsHA968N7rYQjEiquV1P4L.png)
 
@@ -49,7 +49,7 @@ A next-generation ride-hailing platform that revolutionizes urban transportation
 - 💰 Transparent pricing
 - ⏱️ Real-time ETA
 
-<summary>💳 Seamless Payments</summary>
+💳 Seamless Payments
 
 ![Payment System](https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4-LpxryQBIp6Oi98I6T07U2cgQOMaL3A.png)
 
@@ -58,7 +58,7 @@ A next-generation ride-hailing platform that revolutionizes urban transportation
 - 🌐 International payments support
 - 🧪 Test mode for developers
 
-<summary>✅ Smart Booking Management</summary>
+✅ Smart Booking Management
 
 ![Booking Confirmation](https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5-9WR75PGIUb0HhY5AdPrFXIzouN0KJz.png)
 
