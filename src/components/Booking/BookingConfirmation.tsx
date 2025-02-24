@@ -66,7 +66,7 @@ export default function BookingConfirmation() {
               <h2 className="text-xl font-semibold mb-4">Trip Details</h2>
               <GiPathDistance className="text-2xl text-black" />
             </div>
-            <div className="space-y-6">
+            <div className="space-y-6 ">
               <div className="flex items-start gap-4">
                 <div className="flex flex-col space-y-3">
                   <div className="flex space-x-3">
