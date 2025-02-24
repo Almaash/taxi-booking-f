@@ -19,7 +19,6 @@ A next-generation ride-hailing platform that revolutionizes urban transportation
 
 ## ✨ Key Features
 
-<details>
 <summary>🏠 Smart Landing Page</summary>
 
 ![Landing Page](https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-hP9RJ1Amm7jRSX3DWSseao4Za0HAOJ.png)
@@ -30,7 +29,6 @@ A next-generation ride-hailing platform that revolutionizes urban transportation
 - 📱 Fully responsive layout
 </details>
 
-<details>
 <summary>🔐 Secure Authentication</summary>
 
 ![Authentication](https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-daAI5NNCr05eSllawTDoE5TElocm2a.png)
