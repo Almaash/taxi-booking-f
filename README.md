@@ -37,9 +37,7 @@ A next-generation ride-hailing platform that revolutionizes urban transportation
 - 🌐 Google OAuth integration
 - ✉️ Email authentication
 - 🛡️ Enterprise-grade security
-</details>
 
-<details>
 <summary>📍 Intelligent Booking System</summary>
 
 ![Booking System](https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-MwgQUskeEsHA968N7rYQjEiquV1P4L.png)
@@ -50,9 +48,7 @@ A next-generation ride-hailing platform that revolutionizes urban transportation
   - Economy (4 Seater) - ⭐ 4.2
 - 💰 Transparent pricing
 - ⏱️ Real-time ETA
-</details>
 
-<details>
 <summary>💳 Seamless Payments</summary>
 
 ![Payment System](https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4-LpxryQBIp6Oi98I6T07U2cgQOMaL3A.png)
@@ -61,9 +57,7 @@ A next-generation ride-hailing platform that revolutionizes urban transportation
 - 💳 Multiple payment methods
 - 🌐 International payments support
 - 🧪 Test mode for developers
-</details>
 
-<details>
 <summary>✅ Smart Booking Management</summary>
 
 ![Booking Confirmation](https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5-9WR75PGIUb0HhY5AdPrFXIzouN0KJz.png)
@@ -72,11 +66,11 @@ A next-generation ride-hailing platform that revolutionizes urban transportation
 - 📊 Detailed trip metrics
 - 🗺️ Interactive route display
 - ❌ Easy cancellation
-</details>
+
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** React, TypeScript, TailwindCSS
+- **Frontend:** Next JS, TypeScript, TailwindCSS,
 - **Authentication:** Clerk
 - **Maps:** Mapbox
 - **Payments:** Stripe
