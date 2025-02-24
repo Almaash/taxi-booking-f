@@ -74,7 +74,7 @@ A next-generation ride-hailing platform that revolutionizes urban transportation
 - **Authentication:** Clerk
 - **Maps:** Mapbox
 - **Payments:** Stripe
-- **State Management:** Redux Toolkit
+- **State Management:** Context Api
 - **API:** REST
 
 ## 🚀 Quick Start
